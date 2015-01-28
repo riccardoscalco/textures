@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="box">
+  </body>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="textures.js" charset="utf-8"></script>
+  
+  <script>
+
+    var svg = d3.select("#box")
+    .append("svg")
+      .attr("id", "svg")
+      .attr('width', 500)
+      .attr('height', 500);
+
+    var t1 = textures.lines().stroke("blue");
+    svg.call(t1);
+
+    svg.append("path")
+        .attr("d", "M 0 0 L 0 200 L 200 200 L 200 0 Z")
+        .style({
+          "fill": t1.url()
+        });
+
+  </script>
+
+</html>
