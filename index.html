@@ -14,11 +14,13 @@
 
     var svg = d3.select("#box")
     .append("svg")
-      .attr("id", "svg")
       .attr('width', 500)
       .attr('height', 500);
 
-    var t1 = textures.lines().stroke("blue");
+    var t1 = textures.lines()
+        .strokeWidth(110)
+        .size(260);
+    
     svg.call(t1);
 
     svg.append("path")

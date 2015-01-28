@@ -10,26 +10,68 @@
 
   root.textures = {
     lines: function() {
-      var fill, height, id, lines, stroke, strokeWidth, width;
-      width = 4;
-      height = 4;
-      strokeWidth = 1;
-      fill = '#000';
-      stroke = 'red';
+      var background, id, lines, size, stroke, strokeWidth;
+      size = 20;
+      strokeWidth = 2;
+      stroke = '#1a1a1a';
       id = rand();
+      background = '';
       lines = function() {
-        return this.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', width).attr('height', height).append('path').attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2').attr('stroke-width', strokeWidth).attr('stroke', stroke).attr("transform", "rotate(0)");
+        var g;
+        g = this.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
+        if (background) {
+          g.append("rect").attr("width", size).attr("height", size).attr("fill", background);
+        }
+        return g.append('path').attr('d', (function(s) {
+          return 'M ' + s / 4 + ',0 l ' + s / 2 + ',' + s + ' M ' + -s / 4 + ',0 l ' + s / 2 + ',' + s + ' M ' + s * 3 / 4 + ',0 l ' + s / 2 + ',' + s;
+        })(size)).attr('stroke-width', strokeWidth).attr("shape-rendering", "crispEdges").attr('stroke', stroke).attr("stroke-linecap", "square");
       };
-      lines.width = function(_) {
-        width = _;
+      lines.background = function(_) {
+        background = _;
         return lines;
       };
-      lines.height = function(_) {
-        height = _;
+      lines.thicker = function(_) {
+        if (!arguments.length) {
+          strokeWidth = strokeWidth * 2;
+        } else {
+          strokeWidth = strokeWidth * 2 * _;
+        }
+        return lines;
+      };
+      lines.thinner = function(_) {
+        if (!arguments.length) {
+          strokeWidth = strokeWidth / 2;
+        } else {
+          strokeWidth = strokeWidth / (2 * _);
+        }
+        return lines;
+      };
+      lines.farther = function(_) {
+        if (!arguments.length) {
+          size = size * 2;
+        } else {
+          size = size * 2 * _;
+        }
+        return lines;
+      };
+      lines.nearer = function(_) {
+        if (!arguments.length) {
+          size = size / 2;
+        } else {
+          size = size / (2 * _);
+        }
+        return lines;
+      };
+      lines.size = function(_) {
+        size = _;
         return lines;
       };
       lines.stroke = function(_) {
         stroke = _;
+        return lines;
+      };
+      lines.strokeWidth = function(_) {
+        strokeWidth = _;
         return lines;
       };
       lines.id = function(_) {
@@ -40,7 +82,7 @@
           return lines;
         }
       };
-      lines.url = function(_) {
+      lines.url = function() {
         return "url(#" + lines.id() + ")";
       };
       return lines;
