@@ -16,6 +16,22 @@ root.textures = {
       stroke = '#1a1a1a'
       id = rand()
       background = ''
+      orientation = 'diagonal'
+
+      path = (orientation) ->
+        switch orientation
+          when '0/8' then do (s=size) -> 'M '+s/2+', 0 l 0, '+s
+          when 'vertical' then do (s=size) -> 'M '+s/2+', 0 l 0, '+s
+          when '1/8' then do (s=size) -> 'M '+s/4+',0 l '+s/2+','+s+' M '+-s/4+',0 l '+s/2+','+s+' M '+s*3/4+',0 l '+s/2+','+s
+          when '2/8' then do (s=size) -> 'M 0,'+s+' l '+s+','+-s+' M '+-s/4+','+s/4+' l '+s/2+','+-s/2+' M '+3/4*s+','+5/4*s+' l '+s/2+','+-s/2
+          when 'diagonal' then do (s=size) -> 'M 0,'+s+' l '+s+','+-s+' M '+-s/4+','+s/4+' l '+s/2+','+-s/2+' M '+3/4*s+','+5/4*s+' l '+s/2+','+-s/2
+          when '3/8' then do (s=size) -> 'M 0,'+3/4*s+' l '+s+','+-s/2+' M 0,'+s/4+' l '+s+','+-s/2+' M 0,'+s*5/4+' l '+s+','+-s/2
+          when '4/8' then do (s=size) -> 'M 0,'+s/2+' l '+s+',0'
+          when 'horizontal' then do (s=size) -> 'M 0,'+s/2+' l '+s+',0'
+          when '5/8' then do (s=size) -> 'M 0,'+-s/4+' l '+s+','+s/2+'M 0,'+s/4+' l '+s+','+s/2+'M 0,'+s*3/4+' l '+s+','+s/2
+          when '6/8' then do (s=size) -> 'M 0,0 l '+s+','+s+' M '+-s/4+','+3/4*s+' l '+s/2+','+s/2+' M '+s*3/4+','+-s/4+' l '+s/2+','+s/2
+          when '7/8' then do (s=size) -> 'M '+-s/4+',0 l '+s/2+','+s+' M '+s/4+',0 l '+s/2+','+s+' M '+s*3/4+',0 l '+s/2+','+s
+          else do (s=size) -> 'M '+s/2+', 0 l 0, '+s
 
       lines = () ->
           g = this.append('defs')
@@ -30,14 +46,11 @@ root.textures = {
                 .attr("height", size)
                 .attr("fill", background)
           g.append('path')
-              #.attr('d', 'M -1,1 l 2,-2 M 0,10 l 10,-10 M 9,11 l 2,-2')
-              #.attr('d', do (s=size) -> 'M '+s/2+', 0 l 0, '+s)
-              .attr('d', do (s=size) -> 'M '+s/4+',0 l '+s/2+','+s+' M '+-s/4+',0 l '+s/2+','+s+' M '+s*3/4+',0 l '+s/2+','+s)
+              .attr('d', path(orientation))
               .attr('stroke-width', strokeWidth)
               .attr("shape-rendering", "crispEdges")
               .attr('stroke', stroke)
               .attr("stroke-linecap", "square")
-
 
       lines.background = (_) ->
         background = _
@@ -69,6 +82,10 @@ root.textures = {
           size = size / 2
         else
           size = size / ( 2 * _ )
+        lines
+
+      lines.orientation = (_) ->
+        orientation = _
         lines
 
       lines.size = (_) ->
