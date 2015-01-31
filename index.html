@@ -1,32 +1,209 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style type="text/css">
-      .box {
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Textures.js</title>
+		<meta name="description" content="Nifty Modal Window Effects with CSS Transitions and Animations" />
+		<meta name="keywords" content="modal, window, overlay, modern, box, css transition, css animation, effect, 3d, perspective" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+		<script src="js/modernizr.custom.js"></script>
+
+		<style>
+		  body {
+		  	background: #fff;
+		  	color: #1a1a1a;
+		  }
+		  .container > header {
+		  	background: #fff;
+		  }
+		  .container {
+		  	background: #fff;
+		  }
+		  .main {
+		  	max-width: 1000px;
+		  	padding: 0px;
+		  	text-align: center;
+		  }
+		  pre {
+		  	max-width: 200px;
+		  	margin: auto;
+		  }
+		  code {
+		  	font-family: "Inconsolata", monospace;
+		  	font-size: 14px;
+		  }
+		  .md-trigger {
         margin: 10px 10px 10px 10px;
-        float: left;
+        display: inline-block;
+        /*float: left;*/
+		  }
+		  .md-content, .md-modal {
+		  	max-width: 300px;
+		  	background: #fff;
+		  	color: #1a1a1a;
+		  }
+		  .md-content {
+        border: 2px solid #1a1a1a;
+		  }
+      .md-overlay {
+      	background: rgba(255,255,255,0.8)
       }
-    </style>
-  </head>
-  <body>
-  </body>
+      button, button:hover {
+      	background: #1a1a1a;
+      }
+		</style>
+
+	</head>
+	<body>
+
+		<!-- Modals -->
+    
+		<div class="md-modal md-effect-2" id="box1">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines();
+          </code></pre>
+					<button class="md-close">/</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-modal md-effect-2" id="box2">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines()
+  .thicker(10)
+  .farther(1.5);
+          </code></pre>
+					<button class="md-close">Close me!</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-modal md-effect-2" id="box3">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines()
+  .size(5)
+  .strokeWidth(1);
+          </code></pre>
+					<button class="md-close">Close me!</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-modal md-effect-2" id="box4">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines()
+  .size(50)
+  .strokeWidth(2);
+          </code></pre>
+					<button class="md-close">Close me!</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-modal md-effect-2" id="box5">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines()
+  .size(51)
+  .background("red")
+  .stroke("blue")
+  .orientation("horizontal")
+  .strokeWidth(30);
+          </code></pre>
+					<button class="md-close">X</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-modal md-effect-2" id="box6">
+			<div class="md-content">
+				<!--<h3>Modal Dialog</h3>-->
+				<div>
+					<pre><code>
+textures.lines()
+  .size(12)
+  .background("yellow")
+  .stroke("gold")
+  .orientation("vertical")
+  .strokeWidth(6);
+          </code></pre>
+					<button class="md-close">X</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- End Modals -->
+
+		<div class="container">
+
+			<!-- Top Navigation -->
+			<div class="codrops-top clearfix">
+				<span>Previous Demo</span>
+				<span class="right"><span>Back to the Codrops Article</span></span>
+			</div>
+
+			<header>
+				<h1>Textures.js <span>A JavaScript Library for creating SVG patterns</span></h1>
+			</header>
+
+			<div class="main clearfix">
+
+					<div class="md-trigger" data-modal="box1"></div>
+					<div class="md-trigger" data-modal="box2"></div>
+					<div class="md-trigger" data-modal="box3"></div>
+					<div class="md-trigger" data-modal="box4"></div>
+					<div class="md-trigger" data-modal="box5"></div>
+					<div class="md-trigger" data-modal="box6"></div>
+
+			</div>
+
+		</div><!-- /container -->
+
+		<div class="md-overlay"></div><!-- the overlay element -->
+
+		<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+		<script src="js/classie.js"></script>
+		<script src="js/modalEffects.js"></script>
+		<script>
+			// this is important for IEs
+			var polyfilter_scriptpath = '/js/';
+		</script>
+		<script src="js/cssParser.js"></script>
+		<script src="js/css-filters-polyfill.js"></script>
+	</body>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="textures.js" charset="utf-8"></script>
   
   <script>
 
-    var box = function(t) {
-      var box = d3.select("body")
-          .append("div")
-          .attr("class","box");
+    var box = function(id, t) {
+      var box = d3.select("[data-modal="+id+"]");
       var svg = box.append("svg")
-        .attr('width', 170)
-        .attr('height', 170);
+        .attr('width', 140)
+        .attr('height', 140);
       svg.call(t);
       svg.append("path")
-          .attr("d", "M 0 0 L 0 170 L 170 170 L 170 0 Z")
+          .attr("d", "M 0 0 L 0 140 L 140 140 L 140 0 Z")
           .style({
             "fill": t.url()
           });
@@ -35,48 +212,49 @@
     // -----------------------------------------------------------------
 
     var t = textures.lines();
-    box(t);
+    box("box1",t);
     
     // -----------------------------------------------------------------
 
     var t = textures.lines()
         .thicker(10)
         .farther(1.5);
-    box(t);
+    box("box2",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
         .size(5)
         .strokeWidth(1);
-    box(t);
+    box("box3",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
         .size(50)
         .strokeWidth(2);
-    box(t);
+    box("box4",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
         .size(51)
         .background("red")
+        .stroke("blue")
         .orientation("horizontal")
         .strokeWidth(30);
-    box(t);
+    box("box5",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
         .size(12)
         .background("yellow")
+        .stroke("gold")
         .orientation("vertical")
-        .strokeWidth(10);
-    box(t);
+        .strokeWidth(6);
+    box("box6",t);
 
     // -----------------------------------------------------------------
   </script>
-
 </html>
