@@ -13,15 +13,15 @@ root.textures = {
 
       size = 20
       background = ""
-      radius = 1
+      radius = 2
       complement = false
       fill = "#343434"
       stroke = "#343434"
       strokeWidth = 0
-      outerRadius = 0          # not displayed by default
-      outerFill = "#343434"
-      outerStroke = "#343434"
-      outerStrokeWidth = 0
+      # outerRadius = 0          # not displayed by default
+      # outerFill = "#343434"
+      # outerStroke = "#343434"
+      # outerStrokeWidth = 0
       id = rand()
 
       circles = () ->
@@ -36,23 +36,23 @@ root.textures = {
                 .attr("width", size)
                 .attr("height", size)
                 .attr("fill", background)
-          if outerRadius
-            g.append("circle")
-                .attr("cx", size/2)
-                .attr("cy", size/2)
-                .attr("r", outerRadius)
-                .attr("fill", outerFill)
-                .attr("stroke", outerStroke)
-               .attr("stroke-width", outerStrokeWidth)
-            if complement
-              for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
-                g.append("circle")
-                    .attr("cx", corner[0])
-                    .attr("cy", corner[1])
-                    .attr("r", outerRadius)
-                    .attr("fill", outerFill)
-                    .attr("stroke", outerStroke)
-                    .attr("stroke-width", outerStrokeWidth)
+          # if outerRadius
+          #   g.append("circle")
+          #       .attr("cx", size/2)
+          #       .attr("cy", size/2)
+          #       .attr("r", outerRadius)
+          #       .attr("fill", outerFill)
+          #       .attr("stroke", outerStroke)
+          #      .attr("stroke-width", outerStrokeWidth)
+          #   if complement
+          #     for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
+          #       g.append("circle")
+          #           .attr("cx", corner[0])
+          #           .attr("cy", corner[1])
+          #           .attr("r", outerRadius)
+          #           .attr("fill", outerFill)
+          #           .attr("stroke", outerStroke)
+          #           .attr("stroke-width", outerStrokeWidth)
           g.append("circle")
               .attr("cx", size/2)
               .attr("cy", size/2)
@@ -70,7 +70,33 @@ root.textures = {
                   .attr("stroke", stroke)
                   .attr("stroke-width", strokeWidth)
 
+      circles.heavier = (_) ->
+        if not arguments.length
+          radius = radius * 2
+        else
+          radius = if _ then radius * 2 * _ else radius * 2
+        circles
 
+      circles.lighter = (_) ->
+        if not arguments.length
+          radius = radius / 2
+        else
+          radius = if _ then radius / ( 2 * _ ) else radius / 2
+        circles
+
+      circles.thinner = (_) ->
+        if not arguments.length
+          size = size * 2
+        else
+          size = if _ then size * 2 * _ else size * 2
+        circles
+
+      circles.thicker = (_) ->
+        if not arguments.length
+          size = size / 2
+        else
+          size = if _ then size / ( 2 * _ ) else size / 2
+        circles
 
       circles.background = (_) ->
         background = _
@@ -100,21 +126,21 @@ root.textures = {
         strokeWidth = _
         circles
 
-      circles.outerRadius = (_) ->
-        outerRadius = _
-        circles
+      # circles.outerRadius = (_) ->
+      #   outerRadius = _
+      #   circles
 
-      circles.outerFill = (_) ->
-        outerFill = _
-        circles
+      # circles.outerFill = (_) ->
+      #   outerFill = _
+      #   circles
 
-      circles.outerStroke = (_) ->
-        outerStroke = _
-        circles
+      # circles.outerStroke = (_) ->
+      #   outerStroke = _
+      #   circles
 
-      circles.outerStrokeWidth = (_) ->
-        outerStrokeWidth = _
-        circles
+      # circles.outerStrokeWidth = (_) ->
+      #   outerStrokeWidth = _
+      #   circles
 
       circles.id = (_) ->
         if not arguments.length
@@ -183,32 +209,32 @@ root.textures = {
         shapeRendering = _
         lines
 
-      lines.thicker = (_) ->
+      lines.heavier = (_) ->
         if not arguments.length
           strokeWidth = strokeWidth * 2
         else
-          strokeWidth = strokeWidth * 2 * _
+          strokeWidth = if _ then strokeWidth * 2 * _ else strokeWidth * 2
+        lines
+
+      lines.lighter = (_) ->
+        if not arguments.length
+          strokeWidth = strokeWidth / 2
+        else
+          strokeWidth = if _ then strokeWidth / ( 2 * _ ) else strokeWidth / 2
         lines
 
       lines.thinner = (_) ->
         if not arguments.length
-          strokeWidth = strokeWidth / 2
-        else
-          strokeWidth = strokeWidth / ( 2 * _ )
-        lines
-
-      lines.farther = (_) ->
-        if not arguments.length
           size = size * 2
         else
-          size = size * 2 * _
+          size = if _ then size * 2 * _ else size * 2
         lines
 
-      lines.nearer = (_) ->
+      lines.thicker = (_) ->
         if not arguments.length
           size = size / 2
         else
-          size = size / ( 2 * _ )
+          size = if _ then size / ( 2 * _ ) else size / 2
         lines
 
       lines.orientation = (args...) ->
@@ -238,5 +264,105 @@ root.textures = {
         "url(#" + lines.id() + ")"
           
       lines
+
+  # path -------------------------------------------------------------
+  
+  path : () ->
+
+      size = 20
+      strokeWidth = 2
+      stroke = "#343434"
+      id = rand()
+      background = ""
+      d = ""
+      shapeRendering = "auto"
+      fill = "transparent"
+
+      path = () ->
+          g = this.append("defs")
+              .append("pattern")
+              .attr("id", id)
+              .attr("patternUnits", "userSpaceOnUse")
+              .attr("width", size * 3)
+              .attr("height", size * Math.sqrt(3))
+          if background
+            g.append("rect")
+                .attr("width", size)
+                .attr("height", size / Math.sqrt(3))
+                .attr("fill", background)
+          g.append("path")
+              .attr("d", d)
+              .attr("fill", fill)
+              .attr("stroke-width", strokeWidth)
+              .attr("shape-rendering", shapeRendering)
+              .attr("stroke", stroke)
+              .attr("stroke-linecap", "square")
+
+      path.background = (_) ->
+        background = _
+        path
+
+      path.shapeRendering = (_) ->
+        shapeRendering = _
+        path
+
+      path.heavier = (_) ->
+        if not arguments.length
+          strokeWidth = strokeWidth * 2
+        else
+          strokeWidth = if _ then strokeWidth * 2 * _ else strokeWidth * 2
+        path
+
+      path.lighter = (_) ->
+        if not arguments.length
+          strokeWidth = strokeWidth / 2
+        else
+          strokeWidth = if _ then strokeWidth / ( 2 * _ ) else strokeWidth / 2
+        path
+
+      path.thinner = (_) ->
+        if not arguments.length
+          size = size * 2
+        else
+          size = if _ then size * 2 * _ else size * 2
+        path
+
+      path.thicker = (_) ->
+        if not arguments.length
+          size = size / 2
+        else
+          size = if _ then size / ( 2 * _ ) else size / 2
+        path
+
+      path.d = (_) ->
+        switch _
+          # when "hexagon" then d = do (s=size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3))+" l "+(-s/2)+","+(s*Math.sqrt(3))+" l "+(-s)+",0 Z M 0,"+s+" l "+s/2+",0 M "+(3*s)+","+s+" l "+(-s/2)+",0"
+          when "hexagon" then d = do (s=size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0"
+          else d = _
+        path
+
+      path.size = (_) ->
+        size = _
+        path
+
+      path.stroke = (_) ->
+        stroke = _
+        path
+
+      path.strokeWidth = (_) ->
+        strokeWidth = _
+        path
+
+      path.id = (_) ->
+        if not arguments.length
+          id
+        else
+          id = _
+          path
+ 
+      path.url = () ->
+        "url(#" + path.id() + ")"
+          
+      path
 
 }

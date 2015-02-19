@@ -115,24 +115,36 @@
 			<figure data="box2">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
-    .thicker()
-    .farther();
+    .heavier();
                 </code></pre>
 			</figure>
 
 			<figure data="box3">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
-    .thinner()
-    .nearer();
+    .ligher();
                 </code></pre>
 			</figure>
+
+            <figure data="box3_1">
+                <div class="box"></div>
+                <pre><code>textures.lines()
+    .thicker();
+                </code></pre>
+            </figure>
+
+            <figure data="box3_2">
+                <div class="box"></div>
+                <pre><code>textures.lines()
+    .thinner();
+                </code></pre>
+            </figure>
 
 			<figure data="box4">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
-    .thicker(10)
-    .farther(1.5);
+    .heavier(10)
+    .thinner(1.5);
                 </code></pre>
 			</figure>
 
@@ -211,17 +223,45 @@
                 </code></pre>
 			</figure>
 
+            <figure data="box12_1">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .heavier();
+                </code></pre>
+            </figure>
+
+            <figure data="box12_2">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .lighter();
+                </code></pre>
+            </figure>
+
+            <figure data="box12_3">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .thicker();
+                </code></pre>
+            </figure>
+
+            <figure data="box12_4">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .thinner();
+                </code></pre>
+            </figure>
+
+            <figure data="box14">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .complement();
+                </code></pre>
+            </figure>
+
 			<figure data="box13">
 			    <div class="box"></div>
 			    <pre><code>textures.circles()
-    .size(4);
-                </code></pre>
-			</figure>
-
-			<figure data="box14">
-			    <div class="box"></div>
-			    <pre><code>textures.circles()
-    .complement();
+    .size(5);
                 </code></pre>
 			</figure>
 
@@ -262,9 +302,18 @@
                 </code></pre>
 			</figure>
 
+        </section>
+
+        <section>
+
+            <h2>Path</h2>
+
 			<figure data="box19">
 			    <div class="box"></div>
-			    <pre><code>
+			    <pre><code>textures.path()
+    .size(6)
+    .d("hexagon")
+    .strokeWidth(1);
                 </code></pre>
 			</figure>
 
@@ -318,22 +367,32 @@
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .thicker()
-        .farther();
+        .heavier();
     box("box2",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .thinner()
-        .nearer();
+        .lighter();
     box("box3",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .thicker(10)
-        .farther(1.5);
+        .thicker();
+    box("box3_1",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .thinner();
+    box("box3_2",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .heavier(10)
+        .thinner(1.5);
     box("box4",t);
 
     // -----------------------------------------------------------------
@@ -400,7 +459,31 @@
     // -----------------------------------------------------------------    
 
     var t = textures.circles()
-        .size(4);
+        .heavier();
+    box("box12_1",t);
+
+    // ----------------------------------------------------------------- 
+
+    var t = textures.circles()
+        .lighter();
+    box("box12_2",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .thicker();
+    box("box12_3",t);
+
+    // ----------------------------------------------------------------- 
+
+    var t = textures.circles()
+        .thinner();
+    box("box12_4",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .size(5);
     box("box13",t);
 
     // -----------------------------------------------------------------
@@ -442,7 +525,13 @@
         .background("darkorange");
     box("box18",t);
 
+// -----------------------------------------------------------------    
 
+    var t = textures.path()
+        .size(6)
+        .d("hexagon")
+        .strokeWidth(1);
+    box("box19",t);
 
 
 

@@ -11,45 +11,63 @@
 
   root.textures = {
     circles: function() {
-      var background, circles, complement, fill, id, outerFill, outerRadius, outerStroke, outerStrokeWidth, radius, size, stroke, strokeWidth;
+      var background, circles, complement, fill, id, radius, size, stroke, strokeWidth;
       size = 20;
       background = "";
-      radius = 1;
+      radius = 2;
       complement = false;
       fill = "#343434";
       stroke = "#343434";
       strokeWidth = 0;
-      outerRadius = 0;
-      outerFill = "#343434";
-      outerStroke = "#343434";
-      outerStrokeWidth = 0;
       id = rand();
       circles = function() {
-        var corner, g, _i, _j, _len, _len1, _ref, _ref1, _results;
+        var corner, g, _i, _len, _ref, _results;
         g = this.append("defs").append("pattern").attr("id", id).attr("patternUnits", "userSpaceOnUse").attr("width", size).attr("height", size);
         if (background) {
           g.append("rect").attr("width", size).attr("height", size).attr("fill", background);
         }
-        if (outerRadius) {
-          g.append("circle").attr("cx", size / 2).attr("cy", size / 2).attr("r", outerRadius).attr("fill", outerFill).attr("stroke", outerStroke).attr("stroke-width", outerStrokeWidth);
-          if (complement) {
-            _ref = [[0, 0], [0, size], [size, 0], [size, size]];
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              corner = _ref[_i];
-              g.append("circle").attr("cx", corner[0]).attr("cy", corner[1]).attr("r", outerRadius).attr("fill", outerFill).attr("stroke", outerStroke).attr("stroke-width", outerStrokeWidth);
-            }
-          }
-        }
         g.append("circle").attr("cx", size / 2).attr("cy", size / 2).attr("r", radius).attr("fill", fill).attr("stroke", stroke).attr("stroke-width", strokeWidth);
         if (complement) {
-          _ref1 = [[0, 0], [0, size], [size, 0], [size, size]];
+          _ref = [[0, 0], [0, size], [size, 0], [size, size]];
           _results = [];
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            corner = _ref1[_j];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            corner = _ref[_i];
             _results.push(g.append("circle").attr("cx", corner[0]).attr("cy", corner[1]).attr("r", radius).attr("fill", fill).attr("stroke", stroke).attr("stroke-width", strokeWidth));
           }
           return _results;
         }
+      };
+      circles.heavier = function(_) {
+        if (!arguments.length) {
+          radius = radius * 2;
+        } else {
+          radius = _ ? radius * 2 * _ : radius * 2;
+        }
+        return circles;
+      };
+      circles.lighter = function(_) {
+        if (!arguments.length) {
+          radius = radius / 2;
+        } else {
+          radius = _ ? radius / (2 * _) : radius / 2;
+        }
+        return circles;
+      };
+      circles.thinner = function(_) {
+        if (!arguments.length) {
+          size = size * 2;
+        } else {
+          size = _ ? size * 2 * _ : size * 2;
+        }
+        return circles;
+      };
+      circles.thicker = function(_) {
+        if (!arguments.length) {
+          size = size / 2;
+        } else {
+          size = _ ? size / (2 * _) : size / 2;
+        }
+        return circles;
       };
       circles.background = function(_) {
         background = _;
@@ -77,22 +95,6 @@
       };
       circles.strokeWidth = function(_) {
         strokeWidth = _;
-        return circles;
-      };
-      circles.outerRadius = function(_) {
-        outerRadius = _;
-        return circles;
-      };
-      circles.outerFill = function(_) {
-        outerFill = _;
-        return circles;
-      };
-      circles.outerStroke = function(_) {
-        outerStroke = _;
-        return circles;
-      };
-      circles.outerStrokeWidth = function(_) {
-        outerStrokeWidth = _;
         return circles;
       };
       circles.id = function(_) {
@@ -190,35 +192,35 @@
         shapeRendering = _;
         return lines;
       };
-      lines.thicker = function(_) {
+      lines.heavier = function(_) {
         if (!arguments.length) {
           strokeWidth = strokeWidth * 2;
         } else {
-          strokeWidth = strokeWidth * 2 * _;
+          strokeWidth = _ ? strokeWidth * 2 * _ : strokeWidth * 2;
+        }
+        return lines;
+      };
+      lines.lighter = function(_) {
+        if (!arguments.length) {
+          strokeWidth = strokeWidth / 2;
+        } else {
+          strokeWidth = _ ? strokeWidth / (2 * _) : strokeWidth / 2;
         }
         return lines;
       };
       lines.thinner = function(_) {
         if (!arguments.length) {
-          strokeWidth = strokeWidth / 2;
-        } else {
-          strokeWidth = strokeWidth / (2 * _);
-        }
-        return lines;
-      };
-      lines.farther = function(_) {
-        if (!arguments.length) {
           size = size * 2;
         } else {
-          size = size * 2 * _;
+          size = _ ? size * 2 * _ : size * 2;
         }
         return lines;
       };
-      lines.nearer = function(_) {
+      lines.thicker = function(_) {
         if (!arguments.length) {
           size = size / 2;
         } else {
-          size = size / (2 * _);
+          size = _ ? size / (2 * _) : size / 2;
         }
         return lines;
       };
@@ -252,6 +254,101 @@
         return "url(#" + lines.id() + ")";
       };
       return lines;
+    },
+    path: function() {
+      var background, d, fill, id, path, shapeRendering, size, stroke, strokeWidth;
+      size = 20;
+      strokeWidth = 2;
+      stroke = "#343434";
+      id = rand();
+      background = "";
+      d = "";
+      shapeRendering = "auto";
+      fill = "transparent";
+      path = function() {
+        var g;
+        g = this.append("defs").append("pattern").attr("id", id).attr("patternUnits", "userSpaceOnUse").attr("width", size * 3).attr("height", size * Math.sqrt(3));
+        if (background) {
+          g.append("rect").attr("width", size).attr("height", size / Math.sqrt(3)).attr("fill", background);
+        }
+        return g.append("path").attr("d", d).attr("fill", fill).attr("stroke-width", strokeWidth).attr("shape-rendering", shapeRendering).attr("stroke", stroke).attr("stroke-linecap", "square");
+      };
+      path.background = function(_) {
+        background = _;
+        return path;
+      };
+      path.shapeRendering = function(_) {
+        shapeRendering = _;
+        return path;
+      };
+      path.heavier = function(_) {
+        if (!arguments.length) {
+          strokeWidth = strokeWidth * 2;
+        } else {
+          strokeWidth = _ ? strokeWidth * 2 * _ : strokeWidth * 2;
+        }
+        return path;
+      };
+      path.lighter = function(_) {
+        if (!arguments.length) {
+          strokeWidth = strokeWidth / 2;
+        } else {
+          strokeWidth = _ ? strokeWidth / (2 * _) : strokeWidth / 2;
+        }
+        return path;
+      };
+      path.thinner = function(_) {
+        if (!arguments.length) {
+          size = size * 2;
+        } else {
+          size = _ ? size * 2 * _ : size * 2;
+        }
+        return path;
+      };
+      path.thicker = function(_) {
+        if (!arguments.length) {
+          size = size / 2;
+        } else {
+          size = _ ? size / (2 * _) : size / 2;
+        }
+        return path;
+      };
+      path.d = function(_) {
+        switch (_) {
+          case "hexagon":
+            d = (function(s) {
+              return "M " + s + ",0 l " + s + ",0 l " + s / 2 + "," + (s * Math.sqrt(3) / 2) + " l " + (-s / 2) + "," + (s * Math.sqrt(3) / 2) + " l " + (-s) + ",0 l " + (-s / 2) + "," + (-s * Math.sqrt(3) / 2) + " Z M 0," + s * Math.sqrt(3) / 2 + " l " + s / 2 + ",0 M " + (3 * s) + "," + s * Math.sqrt(3) / 2 + " l " + (-s / 2) + ",0";
+            })(size);
+            break;
+          default:
+            d = _;
+        }
+        return path;
+      };
+      path.size = function(_) {
+        size = _;
+        return path;
+      };
+      path.stroke = function(_) {
+        stroke = _;
+        return path;
+      };
+      path.strokeWidth = function(_) {
+        strokeWidth = _;
+        return path;
+      };
+      path.id = function(_) {
+        if (!arguments.length) {
+          return id;
+        } else {
+          id = _;
+          return path;
+        }
+      };
+      path.url = function() {
+        return "url(#" + path.id() + ")";
+      };
+      return path;
     }
   };
 
