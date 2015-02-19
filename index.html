@@ -1,203 +1,303 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title>Textures.js</title>
-		<meta name="description" content="Nifty Modal Window Effects with CSS Transitions and Animations" />
-		<meta name="keywords" content="modal, window, overlay, modern, box, css transition, css animation, effect, 3d, perspective" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico"> 
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
-		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-		<script src="js/modernizr.custom.js"></script>
+		<meta name="description" content="A JavaScript Library for creating SVG patterns" />
+		<meta name="keywords" content="svg, patterns, javascript, d3, textures" />
+		<meta name="author" content="Riccardo Scalco" />
+		<link rel="shortcut icon" href="favicon.ico"> 
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata' rel='stylesheet' type='text/css'>
 
 		<style>
-		  body {
-		  	background: #fff;
-		  	color: #1a1a1a;
-		  }
-		  .container > header {
-		  	background: #fff;
-		  }
-		  .container {
-		  	background: #fff;
-		  }
-		  .main {
-		  	max-width: 1000px;
-		  	padding: 0px;
-		  	text-align: center;
-		  }
-		  pre {
-		  	max-width: 200px;
-		  	margin: auto;
-		  }
-		  code {
-		  	font-family: "Inconsolata", monospace;
-		  	font-size: 14px;
-		  }
-		  .md-trigger {
-        margin: 10px 10px 10px 10px;
-        display: inline-block;
-        /*float: left;*/
-		  }
-		  .md-content, .md-modal {
-		  	max-width: 300px;
-		  	background: #fff;
-		  	color: #1a1a1a;
-		  }
-		  .md-content {
-        border: 2px solid #1a1a1a;
-		  }
-      .md-overlay {
-      	background: rgba(255,255,255,0.8)
-      }
-      button, button:hover {
-      	background: #1a1a1a;
-      }
-		</style>
+
+			::selection {
+			  color: #343434; 
+			  background: #d94839;
+			}
+
+		    html, body {
+		  	  margin: 0;
+		  	  padding: 0;
+		    }
+
+		    body {
+		  	  color: #343434;
+		  	  font-family: "Lato", sans-serif;
+		  	  background: #e74c3c;
+		    }
+
+		    header {
+		  	  background: #d94839;
+		  	  margin: 0;
+		  	  padding: 100px 0px 100px 0px;
+		    }
+
+		    h1 {
+		  	  text-align: center;
+		  	  font-size: 80px;
+		  	  font-weight: 300;;
+		  	  margin: 0;
+		    }
+
+		    h2 {
+		  	  font-size: 20px;
+		  	  text-align: center;
+		  	  font-style: italic;
+		  	  font-weight: 300;
+		  	  padding: 1em;
+		  	  margin: 0;	
+		    }
+
+		    section {
+		  	  margin-top: 20px;
+		  	  margin-bottom: 20px;
+		    }
+
+		    section > h2 {
+		  	  font-size: 20px;
+		  	  background: #d94839;
+		  	  margin-bottom: 20px;
+		    }
+
+		    figure {
+		      opacity: 0;
+		  	  border-bottom: 2px solid #d94839;
+		  	  max-width: 500px;
+		  	  margin: auto;
+		  	  padding: 20px 20px 20px 20px;
+		    }
+
+		    section > figure:last-child {
+		      border-bottom: 0px;
+		    }
+
+		    code {
+		  	  font-family: "Inconsolata", monospace;
+		  	  font-size: 14px;
+		    }
+
+		    pre {
+              margin: 10px 10px 10px 10px;
+              display: inline-block;
+              vertical-align: top;
+		  	  text-align: left;
+		    }
+
+		    .box {
+              margin: 10px 10px 10px 10px;
+              display: inline-block;
+		    }
+
+        </style>
 
 	</head>
+
 	<body>
 
-		<!-- Modals -->
-    
-		<div class="md-modal md-effect-2" id="box1">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines();
-          </code></pre>
-					<button class="md-close">/</button>
-				</div>
-			</div>
-		</div>
+		<header>
+			<h1>Textures.js</h1>
+			<h2>A JavaScript Library for creating SVG patterns</h2>
+		</header>
 
-		<div class="md-modal md-effect-2" id="box2">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines()
-  .thicker(10)
-  .farther(1.5);
-          </code></pre>
-					<button class="md-close">Close me!</button>
-				</div>
-			</div>
-		</div>
+		<section>
 
-		<div class="md-modal md-effect-2" id="box3">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines()
-  .size(5)
-  .strokeWidth(1);
-          </code></pre>
-					<button class="md-close">Close me!</button>
-				</div>
-			</div>
-		</div>
+		    <h2>Lines</h2>
 
-		<div class="md-modal md-effect-2" id="box4">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines()
-  .size(50)
-  .strokeWidth(2);
-          </code></pre>
-					<button class="md-close">Close me!</button>
-				</div>
-			</div>
-		</div>
+			<figure data="box1">
+			    <div class="box"></div>
+			    <pre><code>textures.lines();
+                </code></pre>
+			</figure>
 
-		<div class="md-modal md-effect-2" id="box5">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines()
-  .size(51)
-  .background("red")
-  .stroke("blue")
-  .orientation("horizontal")
-  .strokeWidth(30);
-          </code></pre>
-					<button class="md-close">X</button>
-				</div>
-			</div>
-		</div>
+			<figure data="box2">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .thicker()
+    .farther();
+                </code></pre>
+			</figure>
 
-		<div class="md-modal md-effect-2" id="box6">
-			<div class="md-content">
-				<!--<h3>Modal Dialog</h3>-->
-				<div>
-					<pre><code>
-textures.lines()
-  .size(12)
-  .background("yellow")
-  .stroke("gold")
-  .orientation("vertical")
-  .strokeWidth(6);
-          </code></pre>
-					<button class="md-close">X</button>
-				</div>
-			</div>
-		</div>
+			<figure data="box3">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .thinner()
+    .nearer();
+                </code></pre>
+			</figure>
 
-		<!-- End Modals -->
+			<figure data="box4">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .thicker(10)
+    .farther(1.5);
+                </code></pre>
+			</figure>
 
-		<div class="container">
+			<figure data="box5">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .size(4)
+    .strokeWidth(1);
+                </code></pre>
+			</figure>
 
-			<!-- Top Navigation -->
-			<div class="codrops-top clearfix">
-				<span>Previous Demo</span>
-				<span class="right"><span>Back to the Codrops Article</span></span>
-			</div>
+			<figure data="box6">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .size(8)
+    .strokeWidth(2);
+                </code></pre>
+			</figure>
 
-			<header>
-				<h1>Textures.js <span>A JavaScript Library for creating SVG patterns</span></h1>
-			</header>
+			<figure data="box7">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("vertical")
+    .strokeWidth(1)
+    .shapeRendering("crispEdges");
+                </code></pre>
+			</figure>
 
-			<div class="main clearfix">
+			<figure data="box8">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("3/8")
+    .stroke("darkorange");
+                </code></pre>
+			</figure>
 
-					<div class="md-trigger" data-modal="box1"></div>
-					<div class="md-trigger" data-modal="box2"></div>
-					<div class="md-trigger" data-modal="box3"></div>
-					<div class="md-trigger" data-modal="box4"></div>
-					<div class="md-trigger" data-modal="box5"></div>
-					<div class="md-trigger" data-modal="box6"></div>
+			<figure data="box9">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("3/8", "7/8")
+    .stroke("darkorange");
+			    </code></pre>
+			</figure>
 
-			</div>
+			<figure data="box10">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("vertical", "horizontal")
+    .size(4)
+    .strokeWidth(1)
+    .shapeRendering("crispEdges")
+    .stroke("darkorange");
+			    </code></pre>
+			</figure>
 
-		</div><!-- /container -->
+			<figure data="box11">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("diagonal")
+    .size(40)
+    .strokeWidth(26)
+    .stroke("darkorange")
+    .background("firebrick");
+			    </code></pre>
+			</figure>
 
-		<div class="md-overlay"></div><!-- the overlay element -->
+		</section>
 
-		<!-- classie.js by @desandro: https://github.com/desandro/classie -->
-		<script src="js/classie.js"></script>
-		<script src="js/modalEffects.js"></script>
-		<script>
-			// this is important for IEs
-			var polyfilter_scriptpath = '/js/';
-		</script>
-		<script src="js/cssParser.js"></script>
-		<script src="js/css-filters-polyfill.js"></script>
+		<section>
+
+		    <h2>Circles</h2>
+
+			<figure data="box12">
+			    <div class="box"></div>
+			    <pre><code>textures.circles();
+                </code></pre>
+			</figure>
+
+			<figure data="box13">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .size(4);
+                </code></pre>
+			</figure>
+
+			<figure data="box14">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .complement();
+                </code></pre>
+			</figure>
+
+			<figure data="box15">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4);
+                </code></pre>
+			</figure>
+
+			<figure data="box16">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4)
+    .fill("transparent")
+    .strokeWidth(2);
+                </code></pre>
+			</figure>
+
+			<figure data="box17">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4)
+    .fill("darkorange")
+    .strokeWidth(2)
+    .stroke("firebrick")
+    .complement();
+                </code></pre>
+			</figure>
+
+			<figure data="box18">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .size(10)
+    .radius(2)
+    .fill("firebrick")
+    .background("darkorange");
+                </code></pre>
+			</figure>
+
+			<figure data="box19">
+			    <div class="box"></div>
+			    <pre><code>
+                </code></pre>
+			</figure>
+
+			<figure data="box20">
+			    <div class="box"></div>
+			    <pre><code>
+                </code></pre>
+			</figure>
+
+			<figure data="box21">
+			    <div class="box"></div>
+			    <pre><code>
+                </code></pre>
+			</figure>
+
+			<figure data="box22">
+			    <div class="box"></div>
+			    <pre><code>
+                </code></pre>
+			</figure>
+
+		</section>
+
 	</body>
+
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="textures.js" charset="utf-8"></script>
   
   <script>
 
     var box = function(id, t) {
-      var box = d3.select("[data-modal="+id+"]");
+      var figure = d3.select("[data="+id+"]");
+      var box = figure.select(".box");
       var svg = box.append("svg")
         .attr('width', 140)
         .attr('height', 140);
@@ -207,6 +307,7 @@ textures.lines()
           .style({
             "fill": t.url()
           });
+      figure.transition().duration(1000).style("opacity",1);
     }
 
     // -----------------------------------------------------------------
@@ -217,44 +318,256 @@ textures.lines()
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .thicker(10)
-        .farther(1.5);
+        .thicker()
+        .farther();
     box("box2",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .size(5)
-        .strokeWidth(1);
+        .thinner()
+        .nearer();
     box("box3",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .size(50)
-        .strokeWidth(2);
+        .thicker(10)
+        .farther(1.5);
     box("box4",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .size(51)
-        .background("red")
-        .stroke("blue")
-        .orientation("horizontal")
-        .strokeWidth(30);
+        .size(4)
+        .strokeWidth(1);
     box("box5",t);
 
     // -----------------------------------------------------------------
 
     var t = textures.lines()
-        .size(12)
-        .background("yellow")
-        .stroke("gold")
-        .orientation("vertical")
-        .strokeWidth(6);
+        .size(8)
+        .strokeWidth(2);
     box("box6",t);
 
     // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("vertical")
+        .strokeWidth(1)
+        .shapeRendering("crispEdges");
+    box("box7",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("3/8")
+        .stroke("darkorange");
+    box("box8",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("3/8", "7/8")
+        .stroke("darkorange");
+    box("box9",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("vertical", "horizontal")
+        .size(4)
+        .strokeWidth(1)
+        .shapeRendering("crispEdges")
+        .stroke("darkorange");
+    box("box10",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("diagonal")
+        .size(40)
+        .strokeWidth(26)
+        .stroke("firebrick")
+        .background("darkorange");
+    box("box11",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles();
+    box("box12",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(4);
+    box("box13",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .complement();
+    box("box14",t);
+
+// -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4);
+    box("box15",t);
+
+// -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4)
+        .fill("transparent")
+        .strokeWidth(2);
+    box("box16",t);
+
+// -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4)
+        .fill("darkorange")
+        .strokeWidth(2)
+        .stroke("firebrick")
+        .complement();
+    box("box17",t);
+
+// -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(10)
+        .radius(2)
+        .fill("firebrick")
+        .background("darkorange");
+    box("box18",t);
+
+
+
+
+
+
+
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(2)
+        .outerFill("#fff")
+        .outerRadius(8)
+        .outerStrokeWidth(1)
+    //box("box9",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(9)
+        .outerFill("#fff")
+        .outerStrokeWidth(2)
+        .outerRadius(11);
+    //box("box10",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(5)
+        .outerFill("#fff")
+        .outerStrokeWidth(5)
+        .outerRadius(14);
+    //box("box11",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(6)
+        .fill("#fff")
+        .strokeWidth(1)
+        .outerFill("#fff")
+        .outerStrokeWidth(1)
+        .outerRadius(11);
+    //box("box12",t);
+
+
+    //box("box13",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(7)
+        .radius(4)
+        .fill("#fff")
+        .strokeWidth(2);
+    //box("box14",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .background("gold")
+        .radius(2);
+    //box("box15",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(14)
+        .radius(3)
+        .fill("#fff")
+        .strokeWidth(2);
+    //box("box16",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .background("gold")
+        .fill("orange")
+        .radius(4)
+        .strokeWidth(2)
+        .stroke("brown")
+        .outerFill("yellow")
+        .outerRadius(10)
+        .outerStrokeWidth(2)
+        .outerStroke("brown");
+    //box("box17",t);
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(5)
+        .outerFill("#fff")
+        .outerStrokeWidth(6)
+        .outerRadius(9);
+    //box("box18",t);
+
+
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .radius(6)
+        .complement(true);
+    //box("box20",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(40)
+        .complement(true)
+        .radius(9)
+        .outerFill("#fff")
+        .outerStrokeWidth(2)
+        .outerRadius(11);
+    //box("box21",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .complement(true)
+        .background("gold")
+        .size(16)
+        .fill("purple")
+        .stroke("orange")
+        .radius(4)
+        .strokeWidth(3);
+    //box("box22",t);
+
   </script>
 </html>
