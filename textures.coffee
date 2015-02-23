@@ -1,11 +1,134 @@
 root = exports ? this
 
+# helper function
 rand = () ->
   (Math.random().toString(36)+"00000000000000000")
     .replace(/[^a-z]+/g, "")
     .slice(0, 5)
 
+# factory function
+make = (defaults, accessor) ->
+
+  () ->
+
+    arg = {
+      size : defaults.size
+      shapeRendering : defaults.shapeRendering
+      background : defaults.background
+      fill : defaults.fill
+      stroke : defaults.stroke
+      strokeWidth : defaults.strokeWidth
+      id : rand()
+    }
+    
+    f = () -> accessor this, arg
+
+    f.heavier = (_) ->
+      if not arguments.length
+        arg.strokeWidth = arg.strokeWidth * 2
+      else
+        arg.strokeWidth = if _ then arg.strokeWidth * 2 * _ else arg.strokeWidth * 2
+      f
+
+    f.lighter = (_) ->
+      if not arguments.length
+        arg.strokeWidth = arg.strokeWidth / 2
+      else
+        arg.strokeWidth = if _ then arg.strokeWidth / ( 2 * _ ) else arg.strokeWidth / 2
+      f
+
+    f.thinner = (_) ->
+      if not arguments.length
+        arg.size = arg.size * 2
+      else
+        arg.size = if _ then arg.size * 2 * _ else arg.size * 2
+      f
+
+    f.thicker = (_) ->
+      if not arguments.length
+        arg.size = arg.size / 2
+      else
+        arg.size = if _ then arg.size / ( 2 * _ ) else arg.size / 2
+      f
+
+    f.size = (_) ->
+      arg.size = _
+      f
+
+    f.shapeRendering = (_) ->
+      arg.shapeRendering = _
+      f
+
+    f.background = (_) ->
+      arg.background = _
+      f
+
+    f.fill = (_) ->
+      arg.fill = _
+      f
+
+    f.stroke = (_) ->
+      arg.stroke = _
+      f
+
+    f.strokeWidth = (_) ->
+      arg.strokeWidth = _
+      f
+
+    f.id = (_) ->
+      if not arguments.length
+        arg.id
+      else
+        arg.id = _
+        f
+ 
+    f.url = () ->
+      "url(#" + f.id() + ")"
+
+    f  
+
+# defauls values
+defaults = {
+  size: 20
+  shapeRendering: "auto"
+  background: ""
+  fill: "transparent"
+  stroke: "#343434"
+  strokeWidth: 1
+}
+
+hexagons = (self, arg) ->
+  g = self.append("defs")
+      .append("pattern")
+      .attr("id", arg.id)
+      .attr("patternUnits", "userSpaceOnUse")
+      .attr("width", arg.size * 3)
+      .attr("height", arg.size * Math.sqrt(3))
+  if arg.background
+    g.append("rect")
+        .attr("width", arg.size)
+        .attr("height", arg.size / Math.sqrt(3))
+        .attr("fill", arg.background)
+  g.append("path")
+      .attr("d", do (s=arg.size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0")
+      .attr("fill", arg.fill)
+      .attr("stroke-width", arg.strokeWidth)
+      .attr("shape-rendering", arg.shapeRendering)
+      .attr("stroke", arg.stroke)
+      .attr("stroke-linecap", "square")
+
+# global object
 root.textures = {
+  
+  #################################
+  # patterns with default methods #
+  #################################
+  
+  hexagons : make defaults, hexagons
+
+  #################################
+  # patterns with special methods #
+  #################################
 
   # circles ------------------------------------------------------------
 
@@ -265,7 +388,7 @@ root.textures = {
           
       lines
 
-  # path -------------------------------------------------------------
+  # path ---------------------------------------------------------------
   
   path : () ->
 
@@ -277,21 +400,23 @@ root.textures = {
       d = ""
       shapeRendering = "auto"
       fill = "transparent"
+      
+      svgPath = (_) -> _(size)
 
       path = () ->
           g = this.append("defs")
               .append("pattern")
               .attr("id", id)
               .attr("patternUnits", "userSpaceOnUse")
-              .attr("width", size * 3)
-              .attr("height", size * Math.sqrt(3))
+              .attr("width", size)
+              .attr("height", size)
           if background
             g.append("rect")
                 .attr("width", size)
-                .attr("height", size / Math.sqrt(3))
+                .attr("height", size)
                 .attr("fill", background)
           g.append("path")
-              .attr("d", d)
+              .attr("d", svgPath(d))
               .attr("fill", fill)
               .attr("stroke-width", strokeWidth)
               .attr("shape-rendering", shapeRendering)
@@ -335,10 +460,7 @@ root.textures = {
         path
 
       path.d = (_) ->
-        switch _
-          # when "hexagon" then d = do (s=size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3))+" l "+(-s/2)+","+(s*Math.sqrt(3))+" l "+(-s)+",0 Z M 0,"+s+" l "+s/2+",0 M "+(3*s)+","+s+" l "+(-s/2)+",0"
-          when "hexagon" then d = do (s=size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0"
-          else d = _
+        d = _
         path
 
       path.size = (_) ->
