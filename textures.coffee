@@ -6,130 +6,9 @@ rand = () ->
     .replace(/[^a-z]+/g, "")
     .slice(0, 5)
 
-# factory function
-make = (defaults, accessor) ->
-
-  () ->
-
-    arg = {
-      size : defaults.size
-      shapeRendering : defaults.shapeRendering
-      background : defaults.background
-      fill : defaults.fill
-      stroke : defaults.stroke
-      strokeWidth : defaults.strokeWidth
-      id : rand()
-    }
-    
-    f = () -> accessor this, arg
-
-    f.heavier = (_) ->
-      if not arguments.length
-        arg.strokeWidth = arg.strokeWidth * 2
-      else
-        arg.strokeWidth = if _ then arg.strokeWidth * 2 * _ else arg.strokeWidth * 2
-      f
-
-    f.lighter = (_) ->
-      if not arguments.length
-        arg.strokeWidth = arg.strokeWidth / 2
-      else
-        arg.strokeWidth = if _ then arg.strokeWidth / ( 2 * _ ) else arg.strokeWidth / 2
-      f
-
-    f.thinner = (_) ->
-      if not arguments.length
-        arg.size = arg.size * 2
-      else
-        arg.size = if _ then arg.size * 2 * _ else arg.size * 2
-      f
-
-    f.thicker = (_) ->
-      if not arguments.length
-        arg.size = arg.size / 2
-      else
-        arg.size = if _ then arg.size / ( 2 * _ ) else arg.size / 2
-      f
-
-    f.size = (_) ->
-      arg.size = _
-      f
-
-    f.shapeRendering = (_) ->
-      arg.shapeRendering = _
-      f
-
-    f.background = (_) ->
-      arg.background = _
-      f
-
-    f.fill = (_) ->
-      arg.fill = _
-      f
-
-    f.stroke = (_) ->
-      arg.stroke = _
-      f
-
-    f.strokeWidth = (_) ->
-      arg.strokeWidth = _
-      f
-
-    f.id = (_) ->
-      if not arguments.length
-        arg.id
-      else
-        arg.id = _
-        f
- 
-    f.url = () ->
-      "url(#" + f.id() + ")"
-
-    f  
-
-# defauls values
-defaults = {
-  size: 20
-  shapeRendering: "auto"
-  background: ""
-  fill: "transparent"
-  stroke: "#343434"
-  strokeWidth: 1
-}
-
-hexagons = (self, arg) ->
-  g = self.append("defs")
-      .append("pattern")
-      .attr("id", arg.id)
-      .attr("patternUnits", "userSpaceOnUse")
-      .attr("width", arg.size * 3)
-      .attr("height", arg.size * Math.sqrt(3))
-  if arg.background
-    g.append("rect")
-        .attr("width", arg.size)
-        .attr("height", arg.size / Math.sqrt(3))
-        .attr("fill", arg.background)
-  g.append("path")
-      .attr("d", do (s=arg.size) -> "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0")
-      .attr("fill", arg.fill)
-      .attr("stroke-width", arg.strokeWidth)
-      .attr("shape-rendering", arg.shapeRendering)
-      .attr("stroke", arg.stroke)
-      .attr("stroke-linecap", "square")
-
 # global object
 root.textures = {
   
-  #################################
-  # patterns with default methods #
-  #################################
-  
-  hexagons : make defaults, hexagons
-
-  #################################
-  # patterns with special methods #
-  #################################
-
   # circles ------------------------------------------------------------
 
   circles : () ->
@@ -390,101 +269,111 @@ root.textures = {
 
   # path ---------------------------------------------------------------
   
-  path : () ->
+  paths : () ->
 
       size = 20
+      height = 1
+      width = 1
       strokeWidth = 2
       stroke = "#343434"
-      id = rand()
       background = ""
       d = ""
       shapeRendering = "auto"
       fill = "transparent"
+      id = undefined
       
-      svgPath = (_) -> _(size)
+      svgPath = (_) ->
+        switch _
+          when "hexagons" then do (s=size) ->
+            width = 3
+            height = Math.sqrt(3)
+            "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0"
+          else _(size)
 
-      path = () ->
+      paths = () ->
+          path = svgPath(d)
+          id = rand()
           g = this.append("defs")
               .append("pattern")
               .attr("id", id)
               .attr("patternUnits", "userSpaceOnUse")
-              .attr("width", size)
-              .attr("height", size)
+              .attr("width", size * width)
+              .attr("height", size * height)
           if background
             g.append("rect")
-                .attr("width", size)
-                .attr("height", size)
+                .attr("width", size * width)
+                .attr("height", size * height)
                 .attr("fill", background)
           g.append("path")
-              .attr("d", svgPath(d))
+              .attr("d", path)
               .attr("fill", fill)
               .attr("stroke-width", strokeWidth)
               .attr("shape-rendering", shapeRendering)
               .attr("stroke", stroke)
               .attr("stroke-linecap", "square")
 
-      path.background = (_) ->
+      paths.background = (_) ->
         background = _
-        path
+        paths
 
-      path.shapeRendering = (_) ->
+      paths.shapeRendering = (_) ->
         shapeRendering = _
-        path
+        paths
 
-      path.heavier = (_) ->
+      paths.heavier = (_) ->
         if not arguments.length
           strokeWidth = strokeWidth * 2
         else
           strokeWidth = if _ then strokeWidth * 2 * _ else strokeWidth * 2
-        path
+        paths
 
-      path.lighter = (_) ->
+      paths.lighter = (_) ->
         if not arguments.length
           strokeWidth = strokeWidth / 2
         else
           strokeWidth = if _ then strokeWidth / ( 2 * _ ) else strokeWidth / 2
-        path
+        paths
 
-      path.thinner = (_) ->
+      paths.thinner = (_) ->
         if not arguments.length
           size = size * 2
         else
           size = if _ then size * 2 * _ else size * 2
-        path
+        paths
 
-      path.thicker = (_) ->
+      paths.thicker = (_) ->
         if not arguments.length
           size = size / 2
         else
           size = if _ then size / ( 2 * _ ) else size / 2
-        path
+        paths
 
-      path.d = (_) ->
+      paths.d = (_) ->
         d = _
-        path
+        paths
 
-      path.size = (_) ->
+      paths.size = (_) ->
         size = _
-        path
+        paths
 
-      path.stroke = (_) ->
+      paths.stroke = (_) ->
         stroke = _
-        path
+        paths
 
-      path.strokeWidth = (_) ->
+      paths.strokeWidth = (_) ->
         strokeWidth = _
-        path
+        paths
 
-      path.id = (_) ->
+      paths.id = (_) ->
         if not arguments.length
           id
         else
           id = _
-          path
+          paths
  
-      path.url = () ->
-        "url(#" + path.id() + ")"
+      paths.url = () ->
+        "url(#" + paths.id() + ")"
           
-      path
+      paths
 
 }

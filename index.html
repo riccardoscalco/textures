@@ -15,7 +15,7 @@
 
 			::selection {
 			  color: #343434; 
-			  background: #d94839;
+			  background: rgba(217,72,57,0.1);
 			}
 
 		    html, body {
@@ -81,6 +81,7 @@
 		    code {
 		  	  font-family: "Inconsolata", monospace;
 		  	  font-size: 14px;
+              border-bottom: 1px solid rgba(217,72,57,0.1);
 		    }
 
 		    pre {
@@ -88,6 +89,7 @@
               display: inline-block;
               vertical-align: top;
 		  	  text-align: left;
+              /*background: rgba(255,255,255,0.3);*/
 		    }
 
 		    .box {
@@ -112,60 +114,52 @@
 
 			<figure data="box1">
 			    <div class="box"></div>
-			    <pre><code>textures.lines();
-                </code></pre>
+			    <pre><code>textures.lines();</code></pre>
 			</figure>
 
 			<figure data="box2">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
-    .heavier();
-                </code></pre>
+    .heavier();</code></pre>
 			</figure>
 
 			<figure data="box3">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
-    .ligher();
-                </code></pre>
+    .ligher();</code></pre>
 			</figure>
 
             <figure data="box3_1">
                 <div class="box"></div>
                 <pre><code>textures.lines()
-    .thicker();
-                </code></pre>
+    .thicker();</code></pre>
             </figure>
 
             <figure data="box3_2">
                 <div class="box"></div>
                 <pre><code>textures.lines()
-    .thinner();
-                </code></pre>
+    .thinner();</code></pre>
             </figure>
 
 			<figure data="box4">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
     .heavier(10)
-    .thinner(1.5);
-                </code></pre>
+    .thinner(1.5);</code></pre>
 			</figure>
 
 			<figure data="box5">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
     .size(4)
-    .strokeWidth(1);
-                </code></pre>
+    .strokeWidth(1);</code></pre>
 			</figure>
 
 			<figure data="box6">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
     .size(8)
-    .strokeWidth(2);
-                </code></pre>
+    .strokeWidth(2);</code></pre>
 			</figure>
 
 			<figure data="box7">
@@ -173,24 +167,21 @@
 			    <pre><code>textures.lines()
     .orientation("vertical")
     .strokeWidth(1)
-    .shapeRendering("crispEdges");
-                </code></pre>
+    .shapeRendering("crispEdges");</code></pre>
 			</figure>
 
 			<figure data="box8">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
     .orientation("3/8")
-    .stroke("darkorange");
-                </code></pre>
+    .stroke("darkorange");</code></pre>
 			</figure>
 
 			<figure data="box9">
 			    <div class="box"></div>
 			    <pre><code>textures.lines()
     .orientation("3/8", "7/8")
-    .stroke("darkorange");
-			    </code></pre>
+    .stroke("darkorange");</code></pre>
 			</figure>
 
 			<figure data="box10">
@@ -200,8 +191,7 @@
     .size(4)
     .strokeWidth(1)
     .shapeRendering("crispEdges")
-    .stroke("darkorange");
-			    </code></pre>
+    .stroke("darkorange");</code></pre>
 			</figure>
 
 			<figure data="box11">
@@ -211,8 +201,7 @@
     .size(40)
     .strokeWidth(26)
     .stroke("darkorange")
-    .background("firebrick");
-			    </code></pre>
+    .background("firebrick");</code></pre>
 			</figure>
 
 		</section>
@@ -223,57 +212,49 @@
 
 			<figure data="box12">
 			    <div class="box"></div>
-			    <pre><code>textures.circles();
-                </code></pre>
+			    <pre><code>textures.circles();</code></pre>
 			</figure>
 
             <figure data="box12_1">
                 <div class="box"></div>
                 <pre><code>textures.circles()
-    .heavier();
-                </code></pre>
+    .heavier();</code></pre>
             </figure>
 
             <figure data="box12_2">
                 <div class="box"></div>
                 <pre><code>textures.circles()
-    .lighter();
-                </code></pre>
+    .lighter();</code></pre>
             </figure>
 
             <figure data="box12_3">
                 <div class="box"></div>
                 <pre><code>textures.circles()
-    .thicker();
-                </code></pre>
+    .thicker();</code></pre>
             </figure>
 
             <figure data="box12_4">
                 <div class="box"></div>
                 <pre><code>textures.circles()
-    .thinner();
-                </code></pre>
+    .thinner();</code></pre>
             </figure>
 
             <figure data="box14">
                 <div class="box"></div>
                 <pre><code>textures.circles()
-    .complement();
-                </code></pre>
+    .complement();</code></pre>
             </figure>
 
 			<figure data="box13">
 			    <div class="box"></div>
 			    <pre><code>textures.circles()
-    .size(5);
-                </code></pre>
+    .size(5);</code></pre>
 			</figure>
 
 			<figure data="box15">
 			    <div class="box"></div>
 			    <pre><code>textures.circles()
-    .radius(4);
-                </code></pre>
+    .radius(4);</code></pre>
 			</figure>
 
 			<figure data="box16">
@@ -281,8 +262,7 @@
 			    <pre><code>textures.circles()
     .radius(4)
     .fill("transparent")
-    .strokeWidth(2);
-                </code></pre>
+    .strokeWidth(2);</code></pre>
 			</figure>
 
 			<figure data="box17">
@@ -292,8 +272,7 @@
     .fill("darkorange")
     .strokeWidth(2)
     .stroke("firebrick")
-    .complement();
-                </code></pre>
+    .complement();</code></pre>
 			</figure>
 
 			<figure data="box18">
@@ -302,8 +281,7 @@
     .size(10)
     .radius(2)
     .fill("firebrick")
-    .background("darkorange");
-                </code></pre>
+    .background("darkorange");</code></pre>
 			</figure>
 
         </section>
@@ -314,43 +292,31 @@
 
 			<figure data="box20">
 			    <div class="box"></div>
-			    <pre><code>textures.path()
-    .size(6)
+			    <pre><code>var t = textures.paths()
     .d(function(s) {
-        return "M 0,0 l " +
-          s/2 + "," + s/2 + " l " +
-          s/2 + "," + -s/2;
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
     })
-    .strokeWidth(1)
-    .stroke("darkorange");
-                </code></pre>
+    .size(20)
+    .strokeWidth(2)
+    .stroke("darkorange");</code></pre>
 			</figure>
 
-			<figure data="box21">
-			    <div class="box"></div>
-			    <pre><code>
-                </code></pre>
-			</figure>
-
-			<figure data="box22">
-			    <div class="box"></div>
-			    <pre><code>
-                </code></pre>
-			</figure>
-
-		</section>
-
-        <section>
-
-            <h2>Other patterns</h2>
-
-            <figure data="box19">
+            <figure data="box21">
                 <div class="box"></div>
-                <pre><code>t = textures.hexagons()
-    .size(6)
-    .heavier()
-    .stroke("darkorange");
-                </code></pre>
+                <pre><code>t.lighter()
+    .thicker()
+    .stroke("firebrick")</code></pre>
+            </figure>
+
+            <figure data="box22">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("hexagons")
+    .size(8)
+    .strokeWidth(2)
+    .stroke("darkorange");</code></pre>
             </figure>
 
         </section>
@@ -545,25 +511,29 @@
 
 // -----------------------------------------------------------------    
     var d = function(s) {
-        return "M 0,0 l "+
-          s/2+","+s/2+" l "+
-          s/2+","+-s/2;
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
     }
-    var t = textures.path()
-        .size(6)
+    var t = textures.paths()
         .d(d)
-        .strokeWidth(1)
+        .size(20)
+        .strokeWidth(2)
         .stroke("darkorange");
     box("box20",t);
 
-// -----------------------------------------------------------------    
+// ----------------------------------------------------------------- 
 
-    var t = textures.hexagons()
-        .heavier()
+    box("box21",t.lighter().thicker().stroke("firebrick"));  
+
+// ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("hexagons")
         .size(8)
+        .strokeWidth(2)
         .stroke("darkorange");
-    box("box19",t);
-
+    box("box22",t);
 
     // // -----------------------------------------------------------------    
 
