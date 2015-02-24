@@ -269,6 +269,14 @@
       id = void 0;
       svgPath = function(_) {
         switch (_) {
+          case "crosses":
+            return (function(s) {
+              return "M " + s / 4 + "," + s / 4 + "l" + s / 2 + "," + s / 2 + "M" + s / 4 + "," + s * 3 / 4 + "l" + s / 2 + "," + -s / 2;
+            })(size);
+          case "caps":
+            return (function(s) {
+              return "M " + s / 4 + "," + s * 3 / 4 + "l" + s / 4 + "," + -s / 2 + "l" + s / 4 + "," + s / 2;
+            })(size);
           case "hexagons":
             return (function(s) {
               width = 3;

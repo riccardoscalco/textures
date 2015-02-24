@@ -319,6 +319,23 @@
     .stroke("darkorange");</code></pre>
             </figure>
 
+            <figure data="box23">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("crosses")
+    .lighter()
+    .thicker(2);</code></pre>
+            </figure>
+
+            <figure data="box24">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("caps")
+    .lighter()
+    .thicker()
+    .stroke("darkorange");</code></pre>
+            </figure>
+
         </section>
 
 	</body>
@@ -476,13 +493,13 @@
         .complement();
     box("box14",t);
 
-// -----------------------------------------------------------------    
+    // -----------------------------------------------------------------    
 
     var t = textures.circles()
         .radius(4);
     box("box15",t);
 
-// -----------------------------------------------------------------    
+    // -----------------------------------------------------------------    
 
     var t = textures.circles()
         .radius(4)
@@ -490,7 +507,7 @@
         .strokeWidth(2);
     box("box16",t);
 
-// -----------------------------------------------------------------    
+    // -----------------------------------------------------------------    
 
     var t = textures.circles()
         .radius(4)
@@ -500,7 +517,7 @@
         .complement();
     box("box17",t);
 
-// -----------------------------------------------------------------    
+    // -----------------------------------------------------------------    
 
     var t = textures.circles()
         .size(10)
@@ -509,7 +526,8 @@
         .background("darkorange");
     box("box18",t);
 
-// -----------------------------------------------------------------    
+    // -----------------------------------------------------------------    
+    
     var d = function(s) {
         return "M 0," + s*3/4 + " l " +
           s/2 + "," + -s/2 + " l " +
@@ -522,11 +540,11 @@
         .stroke("darkorange");
     box("box20",t);
 
-// ----------------------------------------------------------------- 
+    // ----------------------------------------------------------------- 
 
     box("box21",t.lighter().thicker().stroke("firebrick"));  
 
-// ----------------------------------------------------------------- 
+    // ----------------------------------------------------------------- 
   
     var t = textures.paths()
         .d("hexagons")
@@ -535,125 +553,22 @@
         .stroke("darkorange");
     box("box22",t);
 
-    // // -----------------------------------------------------------------    
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("crosses")
+        .lighter()
+        .thicker(2);
+    box("box23",t);
 
-    // var t = textures.circles()
-    //     .radius(2)
-    //     .outerFill("#fff")
-    //     .outerRadius(8)
-    //     .outerStrokeWidth(1)
-    // //box("box9",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .radius(9)
-    //     .outerFill("#fff")
-    //     .outerStrokeWidth(2)
-    //     .outerRadius(11);
-    // //box("box10",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .radius(5)
-    //     .outerFill("#fff")
-    //     .outerStrokeWidth(5)
-    //     .outerRadius(14);
-    // //box("box11",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .radius(6)
-    //     .fill("#fff")
-    //     .strokeWidth(1)
-    //     .outerFill("#fff")
-    //     .outerStrokeWidth(1)
-    //     .outerRadius(11);
-    // //box("box12",t);
-
-
-    // //box("box13",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .size(7)
-    //     .radius(4)
-    //     .fill("#fff")
-    //     .strokeWidth(2);
-    // //box("box14",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .background("gold")
-    //     .radius(2);
-    // //box("box15",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .size(14)
-    //     .radius(3)
-    //     .fill("#fff")
-    //     .strokeWidth(2);
-    // //box("box16",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .background("gold")
-    //     .fill("orange")
-    //     .radius(4)
-    //     .strokeWidth(2)
-    //     .stroke("brown")
-    //     .outerFill("yellow")
-    //     .outerRadius(10)
-    //     .outerStrokeWidth(2)
-    //     .outerStroke("brown");
-    // //box("box17",t);
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .radius(5)
-    //     .outerFill("#fff")
-    //     .outerStrokeWidth(6)
-    //     .outerRadius(9);
-    // //box("box18",t);
-
-
-
-    // // -----------------------------------------------------------------
-
-    // var t = textures.circles()
-    //     .radius(6)
-    //     .complement(true);
-    // //box("box20",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .size(40)
-    //     .complement(true)
-    //     .radius(9)
-    //     .outerFill("#fff")
-    //     .outerStrokeWidth(2)
-    //     .outerRadius(11);
-    // //box("box21",t);
-
-    // // -----------------------------------------------------------------    
-
-    // var t = textures.circles()
-    //     .complement(true)
-    //     .background("gold")
-    //     .size(16)
-    //     .fill("purple")
-    //     .stroke("orange")
-    //     .radius(4)
-    //     .strokeWidth(3);
-    // //box("box22",t);
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("caps")
+        .lighter()
+        .thicker()
+        .stroke("darkorange");
+    box("box24",t);
 
   </script>
 </html>

@@ -20,10 +20,6 @@ root.textures = {
       fill = "#343434"
       stroke = "#343434"
       strokeWidth = 0
-      # outerRadius = 0          # not displayed by default
-      # outerFill = "#343434"
-      # outerStroke = "#343434"
-      # outerStrokeWidth = 0
       id = rand()
 
       circles = () ->
@@ -38,26 +34,9 @@ root.textures = {
                 .attr("width", size)
                 .attr("height", size)
                 .attr("fill", background)
-          # if outerRadius
-          #   g.append("circle")
-          #       .attr("cx", size/2)
-          #       .attr("cy", size/2)
-          #       .attr("r", outerRadius)
-          #       .attr("fill", outerFill)
-          #       .attr("stroke", outerStroke)
-          #      .attr("stroke-width", outerStrokeWidth)
-          #   if complement
-          #     for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
-          #       g.append("circle")
-          #           .attr("cx", corner[0])
-          #           .attr("cy", corner[1])
-          #           .attr("r", outerRadius)
-          #           .attr("fill", outerFill)
-          #           .attr("stroke", outerStroke)
-          #           .attr("stroke-width", outerStrokeWidth)
           g.append("circle")
-              .attr("cx", size/2)
-              .attr("cy", size/2)
+              .attr("cx", size / 2)
+              .attr("cy", size / 2)
               .attr("r", radius)
               .attr("fill", fill)
               .attr("stroke", stroke)
@@ -127,22 +106,6 @@ root.textures = {
       circles.strokeWidth = (_) ->
         strokeWidth = _
         circles
-
-      # circles.outerRadius = (_) ->
-      #   outerRadius = _
-      #   circles
-
-      # circles.outerFill = (_) ->
-      #   outerFill = _
-      #   circles
-
-      # circles.outerStroke = (_) ->
-      #   outerStroke = _
-      #   circles
-
-      # circles.outerStrokeWidth = (_) ->
-      #   outerStrokeWidth = _
-      #   circles
 
       circles.id = (_) ->
         if not arguments.length
@@ -282,8 +245,16 @@ root.textures = {
       fill = "transparent"
       id = undefined
       
+      # Contributions with custom paths are welcome,
+      # for example have a look at the "hexagons" path below
+      # (`width` and `height` are in units of `size`)
+
       svgPath = (_) ->
         switch _
+          when "crosses" then do (s=size) ->
+            "M "+s/4+","+s/4+"l"+s/2+","+s/2+"M"+s/4+","+s*3/4+"l"+s/2+","+-s/2
+          when "caps" then do (s=size) ->
+            "M "+s/4+","+s*3/4+"l"+s/4+","+-s/2+"l"+s/4+","+s/2
           when "hexagons" then do (s=size) ->
             width = 3
             height = Math.sqrt(3)
