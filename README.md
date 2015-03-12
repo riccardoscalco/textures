@@ -1,3 +1,3 @@
-Textures.js is a Javascript library for creating SVG patterns.
-Made on top of **d3.js**, it is designed for data visualizaton.
+Here there is the source of the webpage served at the
+address http://riccardoscalco.github.io/textures/.
 
