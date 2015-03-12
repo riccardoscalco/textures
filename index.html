@@ -20,7 +20,6 @@
 
             html {
                 border-top: 5px solid #343434;
-                border-bottom: 5px solid #343434;
             }
 
 		    html, body {
@@ -130,18 +129,55 @@
             }
 
             .map-section {
-               margin-top: 0;
+               opacity: 0;
                margin: auto;
+               margin-top: 0;
+               margin-bottom: 2em;
                max-width: 660px;
+               min-height: 500px;
+            }
+
+            @media (max-width: 640px) {
+                .map-section {
+                   min-height: 250px;
+                }
+            }
+
+            .subtitle {
+                opacity: 0;
+            }
+
+            @media (max-width: 640px) {
+                .subtitle {
+                    font-size: 18px;
+                }
             }
 
             .github {
+                opacity: 0;
                 margin: auto;
-                width: 80px;
+                max-width: 210px;
             }
 
-            .getting-started {
-                margin-top: 5em; 
+            .github span {
+                padding: 0px 10px 0px 0px;
+            }
+
+            .github a {
+                color: firebrick;
+            }
+
+            .github a:hover {
+                color: darkorange;
+            }
+            .github iframe {
+                position: relative;
+                top: 4px;
+            }
+
+            .custom, .getting-started {
+                margin-top: 5em;
+                margin-bottom: 0;
                 padding: 3em 0em 6em 0em;
                 background: #343434;
                 color: darkorange;
@@ -149,12 +185,25 @@
                 font-size: 17px;
             }
 
-            .getting-started h2 {
+            .custom h2, .getting-started h2 {
                 font-size: 30px;
             }
 
+            .getting-started h2 {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .getting-started h3 {
+                margin-top: 0.5em;
+                margin-bottom: 2em;
+                font-style: italic;
+                font-weight: 300;
+            }
+
+
             @media (max-width: 640px) {
-              .getting-started h2 {
+              .custom h2, .getting-started h2 {
                 font-size: 25px;
               }
             }
@@ -191,6 +240,25 @@
                 font-size: 30px;
             }
 
+            @media (max-width: 640px) {
+                .categories h2 {
+                    font-size: 25px;
+                }
+            }
+
+            footer {
+                text-align: center;
+                background: darkorange;
+                color: #343434;
+                font-size: 12px;
+                padding-bottom: 0px;
+            }
+
+            #italy {
+                padding-top: 10px;
+                margin-bottom: 1em;
+            }
+
         </style>
 
 	</head>
@@ -200,10 +268,15 @@
 		<header>
 			<h1>Textures.js</h1>
 			<h2>SVG patterns for Data Visualization</h2>
-<!--             <div class="github"><iframe src="https://ghbtns.com/github-btn.html?user=riccardoscalco&repo=textures&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></div> -->
 		</header>
 
         <section class="map-section">
+        </section>
+
+        <h2 class="subtitle">Textures are useful for the<br>selective perception of different categories</h2>
+        <section class="github">
+          <span>Fork it on <a href="https://github.com/riccardoscalco/textures">github</a></span>
+          <iframe src="https://ghbtns.com/github-btn.html?user=riccardoscalco&repo=textures&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
         </section>
 
 <!--         <section class="description">
@@ -212,7 +285,8 @@
         </section> -->
 
         <section class="getting-started">
-          <h2>Getting started (on top of d3.js)</h2>
+          <h2>Getting started</h2>
+          <h3>-- from the top of d3.js --</h3>
           <div id="example"></div>
           <pre><code>var svg = d3.select("#example")
   .append("svg");
@@ -405,7 +479,10 @@ svg.append("circle")
         </section>
 
         <section class="categories">
-          <h2>Three categories, 2 values each one.<br> For a total of 8 combinations.</h2>
+          <h2>
+              From black - small - dots<br>
+              To white - big - stripes
+          </h2>
           <div id="categories"></div>
         </section>
 
@@ -413,7 +490,7 @@ svg.append("circle")
 
             <h2>Paths</h2>
 
-			<figure data="box20">
+<!-- 			<figure data="box20">
 			    <div class="box"></div>
 			    <pre><code>var t = textures.paths()
     .d(function(s) {
@@ -431,7 +508,7 @@ svg.append("circle")
                 <pre><code>t.lighter()
     .thicker()
     .stroke("firebrick")</code></pre>
-            </figure>
+            </figure> -->
 
             <figure data="box22">
                 <div class="box"></div>
@@ -458,15 +535,33 @@ svg.append("circle")
     .thicker()
     .stroke("darkorange");</code></pre>
             </figure>
-
         </section>
+
+        <section class="custom">
+        <h2>Create custom patterns</h2>
+          <div id="italy"></div>
+          <pre><code>var t = textures.paths()
+    .d(function(s) {
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
+    })
+    .size(20)
+    .strokeWidth(1)
+    .thicker(2)
+    .stroke("darkorange");</code></pre>
+        </section>
+
+        <footer>
+            <span>--- MIT License ---</span>
+        </footer>
 
 	</body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-  <script src="textures.js" charset="utf-8"></script>
+  <script src="textures.min.js" charset="utf-8"></script>
   <script src="map.js" type="text/javascript"></script>
   
   <script>
@@ -733,10 +828,10 @@ svg.append("circle")
         .attr("viewBox", "0 0 600 600")          // make it
         .attr("preserveAspectRatio", "xMidYMid"); // responsive
 
-    var t11 = textures.lines().lighter().thicker(),
-        t12 = textures.circles().lighter().thicker(),
-        t21 = textures.lines().lighter().thicker().stroke("oldlace"),
-        t22 = textures.circles().lighter().thicker().fill("oldlace"),
+    var t11 = textures.lines().thicker(),
+        t12 = textures.circles().thicker(),
+        t21 = textures.lines().thicker().stroke("oldlace"),
+        t22 = textures.circles().thicker().fill("oldlace"),
         t31 = textures.lines().heavier(),
         t32 = textures.circles().heavier(),
         t41 = textures.lines().stroke("oldlace").heavier(),
@@ -802,19 +897,18 @@ svg.append("circle")
     var chart = $("#map"),
         aspect = chart.width() / chart.height(),
         container = chart.parent();
-    $(window).on("resize", function() {
-        var targetWidth = container.width();
-        chart.attr("width", targetWidth);
-        chart.attr("height", Math.round(targetWidth / aspect));
-    }).trigger("resize");
 
-    var chart = $("#square"),
-        aspect = chart.width() / chart.height(),
-        container = chart.parent();
+    var chart1 = $("#square"),
+        aspect1 = chart1.width() / chart1.height(),
+        container1 = chart1.parent();
+
     $(window).on("resize", function() {
         var targetWidth = container.width();
+        var targetWidth1 = container1.width();
         chart.attr("width", targetWidth);
         chart.attr("height", Math.round(targetWidth / aspect));
+        chart1.attr("width", targetWidth1);
+        chart1.attr("height", Math.round(targetWidth1 / aspect1));
     }).trigger("resize");
   </script>
 

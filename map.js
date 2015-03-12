@@ -24,6 +24,24 @@
   svg.call(t3);
   svg.call(t4);
   var getPattern;
+  
+  var wi = 150,
+      hi = 200;
+  // var t = textures.lines().stroke("darkorange").lighter().thicker();
+  var t = textures.paths()
+    .d(function(s) {
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
+    })
+    .size(30)
+    .strokeWidth(1)
+    .thicker(2)
+    .stroke("darkorange");
+  var italy = d3.select("#italy").append("svg")
+      .attr("width", wi)
+      .attr("height", hi);
+  italy.call(t);
 
   getPattern = function(province) {
     switch (province.toLowerCase()) {
@@ -236,6 +254,26 @@
           .datum(subunits)
           .attr("class", "map")
           .attr("d", path)
+
+      d3.select(".map-section").transition().duration(1500).style("opacity",1);
+      d3.select(".subtitle").transition().delay(500).duration(1000).style("opacity",1);
+      d3.select(".github").transition().delay(800).duration(1000).style("opacity",1);
+
+      var projectionItaly = d3.geo.albers()
+          .center([0, 42])
+          .rotate([347, 0])
+          .parallels([35, 45])
+          .scale(1000)
+          .translate([wi / 2, hi / 2]);
+
+      var pathItaly = d3.geo.path()
+          .projection(projectionItaly);
+
+      // draw border with sea
+      italy.append("path")
+        .datum(topojson.mesh(it, it.objects.sub, function(a, b) { return a === b ; }))
+        .attr("d", pathItaly)
+        .style("fill", t.url());
 
   })
 
