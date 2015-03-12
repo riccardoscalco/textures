@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Textures.js</title>
+		<meta name="description" content="A JavaScript Library for creating SVG patterns" />
+		<meta name="keywords" content="svg, patterns, javascript, d3, textures" />
+		<meta name="author" content="Riccardo Scalco" />
+		<link rel="shortcut icon" href="favicon.ico"> 
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata' rel='stylesheet' type='text/css'>
+
+		<style>
+
+			::selection {
+			  color: #343434; 
+			  background: #eee;
+			}
+
+            html {
+                border-top: 5px solid #343434;
+            }
+
+		    html, body {
+		  	  margin: 0;
+		  	  padding: 0;
+		    }
+
+		    body {
+		  	  color: #343434;
+		  	  font-family: "Lato", sans-serif;
+		  	  /*background: #e74c3c;*/
+              /*background: rgba(231,76,60,0.1);*/
+              background: oldlace;
+		    }
+
+		    header {
+		  	  background: oldlace;
+              /*background: rgba(217,72,57,0.1);*/
+		  	  margin: 0;
+		  	  padding: 0;
+              padding-top: 4em;
+              /*border-bottom: 2px solid rgba(217,72,57,0.1);*/
+              border-bottom: 1px solid #666;
+              margin: auto;
+              max-width: 500px;
+              width: 80%;
+		    }
+
+		    h1 {
+		  	  text-align: center;
+		  	  font-size: 80px;
+		  	  font-weight: 300;
+		  	  margin: 0;
+		    }
+
+            @media (max-width: 640px) {
+              h1 {
+                font-size: 50px;
+              }
+            }
+
+		    h2 {
+		  	  font-size: 22px;
+		  	  text-align: center;
+		  	  font-style: italic;
+		  	  font-weight: 300;
+		  	  padding: 1em;
+		  	  margin: 0;
+		    }
+
+		    section {
+		  	  margin-top: 20px;
+		  	  margin-bottom: 20px;
+		    }
+
+		    section > h2 {
+		  	  font-size: 20px;
+		  	  /*background: #d94839;*/
+              background: rgba(217,72,57,0);
+		  	  margin-bottom: 20px;
+		    }
+
+		    figure {
+		      opacity: 0;
+		  	  /*border-bottom: 2px solid rgba(217,72,57,0.1);*/
+              border-bottom: 1px solid rgba(0,0,0,0.1);
+		  	  max-width: 500px;
+		  	  margin: auto;
+		  	  padding: 20px 20px 20px 20px;
+		    }
+
+		    section > figure:last-child {
+		      border-bottom: 0px;
+		    }
+
+		    code {
+		  	  font-family: "Inconsolata", monospace;
+		  	  font-size: 14px;
+              /*border-bottom: 1px solid rgba(217,72,57,0.1);*/
+              /*border-bottom: 1px solid rgba(0,0,0,0.1);*/
+		    }
+
+		    pre {
+              margin: 10px 10px 10px 10px;
+              display: inline-block;
+              vertical-align: top;
+		  	  text-align: left;
+              /*background: rgba(255,255,255,0.3);*/
+		    }
+
+            .lines {
+            }
+
+		    .box {
+              margin: 10px 10px 10px 10px;
+              display: inline-block;
+		    }
+
+            .map {
+                fill: none;
+                stroke: #131313;
+                stroke-width: 1px;
+            }
+            .prov {
+                stroke: oldlace;
+                stroke-width: 4px;
+            }
+
+            .map-section {
+               opacity: 0;
+               margin: auto;
+               margin-top: 0;
+               margin-bottom: 2em;
+               max-width: 660px;
+               min-height: 500px;
+            }
+
+            @media (max-width: 640px) {
+                .map-section {
+                   min-height: 250px;
+                }
+            }
+
+            .subtitle {
+                opacity: 0;
+            }
+
+            @media (max-width: 640px) {
+                .subtitle {
+                    font-size: 18px;
+                }
+            }
+
+            .github {
+                opacity: 0;
+                margin: auto;
+                max-width: 210px;
+            }
+
+            .github span {
+                padding: 0px 10px 0px 0px;
+            }
+
+            .github a {
+                color: firebrick;
+            }
+
+            .github a:hover {
+                color: darkorange;
+            }
+            .github iframe {
+                position: relative;
+                top: 4px;
+            }
+
+            .custom, .getting-started {
+                margin-top: 5em;
+                margin-bottom: 0;
+                padding: 3em 0em 6em 0em;
+                background: #343434;
+                color: darkorange;
+                text-align: center;
+                font-size: 17px;
+            }
+
+            .custom h2, .getting-started h2 {
+                font-size: 30px;
+            }
+
+            .getting-started h2 {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .getting-started h3 {
+                margin-top: 0.5em;
+                margin-bottom: 2em;
+                font-style: italic;
+                font-weight: 300;
+            }
+
+
+            @media (max-width: 640px) {
+              .custom h2, .getting-started h2 {
+                font-size: 25px;
+              }
+            }
+
+            .getting-started code {
+                border-bottom: 0;
+            }
+
+            #example {
+                margin-bottom: 1em;
+            }
+
+            .circles h2, .lines h2, .paths h2 {
+                margin-top: 2em;
+                font-size: 30px;
+            }
+
+            .categories {
+                background: firebrick;
+                text-align: center;
+            }
+
+            #categories {
+                padding-top: 1em;
+                padding-bottom: 4em;
+                max-width: 600px;
+                width: 90%;
+                margin: auto;
+            }
+
+            .categories h2 {
+                padding-top: 2em;
+                color: oldlace;
+                font-size: 30px;
+            }
+
+            @media (max-width: 640px) {
+                .categories h2 {
+                    font-size: 25px;
+                }
+            }
+
+            footer {
+                text-align: center;
+                background: darkorange;
+                color: #343434;
+                font-size: 12px;
+                padding-bottom: 0px;
+            }
+
+            #italy {
+                padding-top: 10px;
+                margin-bottom: 1em;
+            }
+
+        </style>
+
+	</head>
+
+	<body>
+
+		<header>
+			<h1>Textures.js</h1>
+			<h2>SVG patterns for Data Visualization</h2>
+		</header>
+
+        <section class="map-section">
+        </section>
+
+        <h2 class="subtitle">Textures are useful for the<br>selective perception of different categories</h2>
+        <section class="github">
+          <span>Fork it on <a href="https://github.com/riccardoscalco/textures">github</a></span>
+          <iframe src="https://ghbtns.com/github-btn.html?user=riccardoscalco&repo=textures&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
+        </section>
+
+<!--         <section class="description">
+          <em>A difference in textures allow the visual selection of different categories</em>.
+          Textures.js is built on top of d3.js and it maks easy to create 
+        </section> -->
+
+        <section class="getting-started">
+          <h2>Getting started</h2>
+          <h3>-- from the top of d3.js --</h3>
+          <div id="example"></div>
+          <pre><code>var svg = d3.select("#example")
+  .append("svg");
+
+var t = textures.lines()
+  .thicker();
+
+svg.call(t);
+
+svg.append("circle")
+  .style("fill", t.url());</code></pre>
+        </section>
+
+		<section class="lines">
+
+		    <h2>Lines</h2>
+
+			<figure data="box1">
+			    <div class="box"></div>
+			    <pre><code>textures.lines();</code></pre>
+			</figure>
+
+			<figure data="box2">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .heavier();</code></pre>
+			</figure>
+
+			<figure data="box3">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .ligher();</code></pre>
+			</figure>
+
+            <figure data="box3_1">
+                <div class="box"></div>
+                <pre><code>textures.lines()
+    .thicker();</code></pre>
+            </figure>
+
+            <figure data="box3_2">
+                <div class="box"></div>
+                <pre><code>textures.lines()
+    .thinner();</code></pre>
+            </figure>
+
+			<figure data="box4">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .heavier(10)
+    .thinner(1.5);</code></pre>
+			</figure>
+
+			<figure data="box5">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .size(4)
+    .strokeWidth(1);</code></pre>
+			</figure>
+
+			<figure data="box6">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .size(8)
+    .strokeWidth(2);</code></pre>
+			</figure>
+
+			<figure data="box7">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("vertical")
+    .strokeWidth(1)
+    .shapeRendering("crispEdges");</code></pre>
+			</figure>
+
+			<figure data="box8">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("3/8")
+    .stroke("darkorange");</code></pre>
+			</figure>
+
+			<figure data="box9">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("3/8", "7/8")
+    .stroke("darkorange");</code></pre>
+			</figure>
+
+			<figure data="box10">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("vertical", "horizontal")
+    .size(4)
+    .strokeWidth(1)
+    .shapeRendering("crispEdges")
+    .stroke("darkorange");</code></pre>
+			</figure>
+
+			<figure data="box11">
+			    <div class="box"></div>
+			    <pre><code>textures.lines()
+    .orientation("diagonal")
+    .size(40)
+    .strokeWidth(26)
+    .stroke("darkorange")
+    .background("firebrick");</code></pre>
+			</figure>
+
+		</section>
+
+		<section class="circles">
+
+		    <h2>Circles</h2>
+
+			<figure data="box12">
+			    <div class="box"></div>
+			    <pre><code>textures.circles();</code></pre>
+			</figure>
+
+            <figure data="box12_1">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .heavier();</code></pre>
+            </figure>
+
+            <figure data="box12_2">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .lighter();</code></pre>
+            </figure>
+
+            <figure data="box12_3">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .thicker();</code></pre>
+            </figure>
+
+            <figure data="box12_4">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .thinner();</code></pre>
+            </figure>
+
+            <figure data="box14">
+                <div class="box"></div>
+                <pre><code>textures.circles()
+    .complement();</code></pre>
+            </figure>
+
+			<figure data="box13">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .size(5);</code></pre>
+			</figure>
+
+			<figure data="box15">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4);</code></pre>
+			</figure>
+
+			<figure data="box16">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4)
+    .fill("transparent")
+    .strokeWidth(2);</code></pre>
+			</figure>
+
+			<figure data="box17">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .radius(4)
+    .fill("darkorange")
+    .strokeWidth(2)
+    .stroke("firebrick")
+    .complement();</code></pre>
+			</figure>
+
+			<figure data="box18">
+			    <div class="box"></div>
+			    <pre><code>textures.circles()
+    .size(10)
+    .radius(2)
+    .fill("firebrick")
+    .background("darkorange");</code></pre>
+			</figure>
+
+        </section>
+
+        <section class="categories">
+          <h2>
+              From black - small - dots<br>
+              To white - big - stripes
+          </h2>
+          <div id="categories"></div>
+        </section>
+
+        <section class="paths">
+
+            <h2>Paths</h2>
+
+<!-- 			<figure data="box20">
+			    <div class="box"></div>
+			    <pre><code>var t = textures.paths()
+    .d(function(s) {
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
+    })
+    .size(20)
+    .strokeWidth(2)
+    .stroke("darkorange");</code></pre>
+			</figure>
+
+            <figure data="box21">
+                <div class="box"></div>
+                <pre><code>t.lighter()
+    .thicker()
+    .stroke("firebrick")</code></pre>
+            </figure> -->
+
+            <figure data="box22">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("hexagons")
+    .size(8)
+    .strokeWidth(2)
+    .stroke("darkorange");</code></pre>
+            </figure>
+
+            <figure data="box23">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("crosses")
+    .lighter()
+    .thicker(2);</code></pre>
+            </figure>
+
+            <figure data="box24">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("caps")
+    .lighter()
+    .thicker()
+    .stroke("darkorange");</code></pre>
+            </figure>
+        </section>
+
+        <section class="custom">
+        <h2>Create custom patterns</h2>
+          <div id="italy"></div>
+          <pre><code>var t = textures.paths()
+    .d(function(s) {
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
+    })
+    .size(20)
+    .strokeWidth(1)
+    .thicker(2)
+    .stroke("darkorange");</code></pre>
+        </section>
+
+        <footer>
+            <span>--- MIT License ---</span>
+        </footer>
+
+	</body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+  <script src="textures.min.js" charset="utf-8"></script>
+  <script src="map.js" type="text/javascript"></script>
+  
+  <script>
+
+    var box = function(id, t) {
+      var figure = d3.select("[data="+id+"]");
+      var box = figure.select(".box");
+      var svg = box.append("svg")
+        .attr('width', 140)
+        .attr('height', 140);
+      svg.call(t);
+      svg.append("path")
+          .attr("d", "M 0 0 L 0 140 L 140 140 L 140 0 Z")
+          .style({
+            "fill": t.url()
+          });
+      figure.transition().duration(1000).style("opacity",1);
+    }
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines();
+    box("box1",t);
+    
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .heavier();
+    box("box2",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .lighter();
+    box("box3",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .thicker();
+    box("box3_1",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .thinner();
+    box("box3_2",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .heavier(10)
+        .thinner(1.5);
+    box("box4",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .size(4)
+        .strokeWidth(1);
+    box("box5",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .size(8)
+        .strokeWidth(2);
+    box("box6",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("vertical")
+        .strokeWidth(1)
+        .shapeRendering("crispEdges");
+    box("box7",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("3/8")
+        .stroke("darkorange");
+    box("box8",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("3/8", "7/8")
+        .stroke("darkorange");
+    box("box9",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .size(4)
+        .orientation("vertical", "horizontal")
+        .strokeWidth(1)
+        .shapeRendering("crispEdges")
+        .stroke("darkorange");
+    box("box10",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.lines()
+        .orientation("diagonal")
+        .size(40)
+        .strokeWidth(26)
+        .stroke("firebrick")
+        .background("darkorange");
+    box("box11",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles();
+    box("box12",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .heavier();
+    box("box12_1",t);
+
+    // ----------------------------------------------------------------- 
+
+    var t = textures.circles()
+        .lighter();
+    box("box12_2",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .thicker();
+    box("box12_3",t);
+
+    // ----------------------------------------------------------------- 
+
+    var t = textures.circles()
+        .thinner();
+    box("box12_4",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .size(5);
+    box("box13",t);
+
+    // -----------------------------------------------------------------
+
+    var t = textures.circles()
+        .complement();
+    box("box14",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4);
+    box("box15",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4)
+        .fill("transparent")
+        .strokeWidth(2);
+    box("box16",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .radius(4)
+        .fill("darkorange")
+        .strokeWidth(2)
+        .stroke("firebrick")
+        .complement();
+    box("box17",t);
+
+    // -----------------------------------------------------------------    
+
+    var t = textures.circles()
+        .size(10)
+        .radius(2)
+        .fill("firebrick")
+        .background("darkorange");
+    box("box18",t);
+
+    // -----------------------------------------------------------------    
+    
+    var d = function(s) {
+        return "M 0," + s*3/4 + " l " +
+          s/2 + "," + -s/2 + " l " +
+          s/2 + "," + s/2;
+    }
+    var t = textures.paths()
+        .d(d)
+        .size(20)
+        .strokeWidth(2)
+        .stroke("darkorange");
+    box("box20",t);
+
+    // ----------------------------------------------------------------- 
+
+    box("box21",t.lighter().thicker().stroke("firebrick"));  
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("hexagons")
+        .size(8)
+        .strokeWidth(2)
+        .stroke("darkorange");
+    box("box22",t);
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("crosses")
+        .lighter()
+        .thicker(2);
+    box("box23",t);
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("caps")
+        .lighter()
+        .thicker()
+        .stroke("darkorange");
+    box("box24",t);
+
+  </script>
+
+  <script>
+    var w = 150,
+        h = 150;
+    var svg = d3.select("#example")
+        .append("svg")
+        .attr("width",w)
+        .attr("height", h);
+    var t = textures.lines()
+        .stroke("darkorange")
+        .thicker();
+    svg.call(t);
+    svg.append("circle")
+        .attr({
+            "cx": w/2,
+            "cy": h/2,
+            "r": 60
+        })
+        .style({
+            "fill": t.url(),
+            "stroke": "darkorange",
+            "stroke-width": 2
+        });
+
+  </script>
+
+  <script>
+
+    var svg = d3.select("#categories")
+        .append("svg")
+        .attr("id","square")
+        .attr("width", 60 * 10)
+        .attr("height", 60 * 10)
+        .attr("viewBox", "0 0 600 600")          // make it
+        .attr("preserveAspectRatio", "xMidYMid"); // responsive
+
+    var t11 = textures.lines().thicker(),
+        t12 = textures.circles().thicker(),
+        t21 = textures.lines().thicker().stroke("oldlace"),
+        t22 = textures.circles().thicker().fill("oldlace"),
+        t31 = textures.lines().heavier(),
+        t32 = textures.circles().heavier(),
+        t41 = textures.lines().stroke("oldlace").heavier(),
+        t42 = textures.circles().fill("oldlace").heavier();
+
+    svg.call(t11);
+    svg.call(t12);
+    svg.call(t21);
+    svg.call(t22);
+    svg.call(t31);
+    svg.call(t32);
+    svg.call(t41);
+    svg.call(t42);    
+
+    // svg.append("path")
+    //     .attr("d","M 0 0 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t11.url());
+    // svg.append("path")
+    //     .attr("d","M 140 0 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t12.url());  
+    // svg.append("path")
+    //     .attr("d","M 0 140 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t21.url());
+    // svg.append("path")
+    //     .attr("d","M 140 140 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t22.url());
+    // svg.append("path")
+    //     .attr("d","M 0 280 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t31.url());
+    // svg.append("path")
+    //     .attr("d","M 140 280 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t32.url());
+    // svg.append("path")
+    //     .attr("d","M 0 420 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t41.url());
+    // svg.append("path")
+    //     .attr("d","M 140 420 l 140 0 l 0 140 l -140 0 Z")
+    //     .style("fill", t42.url());
+
+    var g = svg.append("g");
+    var getRandomTextures, i, j, k, l, tt;
+    tt = [t11, t12, t21, t22, t31, t32, t41, t42];
+    getRandomTextures = function() {
+      return tt[Math.floor(Math.random() * tt.length)].url();
+    };
+
+    for (i = k = 0; k <= 9; i = ++k) {
+      for (j = l = 0; l <= 9; j = ++l) {
+        g.append("path")
+            .attr("d", "M " + (i*60) + " " + (j*60) + " l 60 0 l 0 60 l -60 0 Z")
+            .style("fill", getRandomTextures());
+      }
+    }
+    
+
+
+
+
+  </script>
+
+  <!-- Make it responsive -->
+  <script>
+    var chart = $("#map"),
+        aspect = chart.width() / chart.height(),
+        container = chart.parent();
+
+    var chart1 = $("#square"),
+        aspect1 = chart1.width() / chart1.height(),
+        container1 = chart1.parent();
+
+    $(window).on("resize", function() {
+        var targetWidth = container.width();
+        var targetWidth1 = container1.width();
+        chart.attr("width", targetWidth);
+        chart.attr("height", Math.round(targetWidth / aspect));
+        chart1.attr("width", targetWidth1);
+        chart1.attr("height", Math.round(targetWidth1 / aspect1));
+    }).trigger("resize");
+  </script>
+
+</html>
