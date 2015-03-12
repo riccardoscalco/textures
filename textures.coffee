@@ -251,6 +251,10 @@ root.textures = {
 
       svgPath = (_) ->
         switch _
+          when "waves" then do (s=size) ->
+            "M 0 0 c "+s/8+" "+-s/4+" , "+s*3/8+" "+-s/4+" , "+s/2+" 0 c "+s/8+" "+s/4+" , "+s*3/8+" "+s/4+" , "+s/2+" 0"
+          when "woven" then do (s=size) ->
+            "M "+s/4+","+s/4+"l"+s/2+","+s/2+"M"+s*3/4+","+s/4+"l"+s/2+","+-s/2+"M"+s/4+","+s*3/4+"l"+-s/2+","+s/2
           when "crosses" then do (s=size) ->
             "M "+s/4+","+s/4+"l"+s/2+","+s/2+"M"+s/4+","+s*3/4+"l"+s/2+","+-s/2
           when "caps" then do (s=size) ->
