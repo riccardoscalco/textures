@@ -271,7 +271,7 @@
         switch (_) {
           case "waves":
             return (function(s) {
-              return "M 0 0 c " + s / 8 + " " + -s / 4 + " , " + s * 3 / 8 + " " + -s / 4 + " , " + s / 2 + " 0 c " + s / 8 + " " + s / 4 + " , " + s * 3 / 8 + " " + s / 4 + " , " + s / 2 + " 0";
+              return "M 0 " + s / 2 + " c " + s / 8 + " " + -s / 4 + " , " + s * 3 / 8 + " " + -s / 4 + " , " + s / 2 + " 0 c " + s / 8 + " " + s / 4 + " , " + s * 3 / 8 + " " + s / 4 + " , " + s / 2 + " 0";
             })(size);
           case "woven":
             return (function(s) {
