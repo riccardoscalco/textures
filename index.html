@@ -537,6 +537,25 @@ svg.append("circle")
     .thicker()
     .stroke("darkorange");</code></pre>
             </figure>
+
+            <figure data="box25">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("caps")
+    .lighter()
+    .thicker()
+    .stroke("darkorange");</code></pre>
+            </figure>
+
+            <figure data="box26">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("caps")
+    .lighter()
+    .thicker()
+    .stroke("darkorange");</code></pre>
+            </figure>
+
         </section>
 
         <section class="custom">
@@ -750,21 +769,21 @@ svg.append("circle")
 
     // -----------------------------------------------------------------    
     
-    var d = function(s) {
-        return "M 0," + s*3/4 + " l " +
-          s/2 + "," + -s/2 + " l " +
-          s/2 + "," + s/2;
-    }
-    var t = textures.paths()
-        .d(d)
-        .size(20)
-        .strokeWidth(2)
-        .stroke("darkorange");
-    box("box20",t);
+    // var d = function(s) {
+    //     return "M 0," + s*3/4 + " l " +
+    //       s/2 + "," + -s/2 + " l " +
+    //       s/2 + "," + s/2;
+    // }
+    // var t = textures.paths()
+    //     .d(d)
+    //     .size(20)
+    //     .strokeWidth(2)
+    //     .stroke("darkorange");
+    // box("box20",t);
 
-    // ----------------------------------------------------------------- 
+    // // ----------------------------------------------------------------- 
 
-    box("box21",t.lighter().thicker().stroke("firebrick"));  
+    // box("box21",t.lighter().thicker().stroke("firebrick"));  
 
     // ----------------------------------------------------------------- 
   
@@ -791,6 +810,24 @@ svg.append("circle")
         .thicker()
         .stroke("darkorange");
     box("box24",t);
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("woven")
+        .lighter()
+        .thicker()
+        .stroke("darkorange");
+    box("box25",t);
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("waves")
+        .lighter()
+        .thicker()
+        .stroke("darkorange");
+    box("box26",t);
 
   </script>
 
