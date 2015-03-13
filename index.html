@@ -135,7 +135,7 @@
             }
 
             .map-section {
-               opacity: 0;
+               /*opacity: 0;*/
                margin: auto;
                margin-top: 0;
                margin-bottom: 2em;
@@ -150,7 +150,7 @@
             }
 
             .subtitle {
-                opacity: 0;
+                /*opacity: 0;*/
             }
 
             @media (max-width: 640px) {
@@ -160,7 +160,7 @@
             }
 
             .github {
-                opacity: 0;
+                /*opacity: 0;*/
                 margin: auto;
                 /*max-width: 210px;*/
                 max-width: 120px;
@@ -261,10 +261,14 @@
                 padding-bottom: 0px;
             }
 
-            #italy {
+            #legend {
                 padding-top: 10px;
-                margin-bottom: 1em;
+                margin-bottom: 2em;                
             }
+/*
+            #italy {
+                margin-top: 3em;
+            }*/
 
         </style>
 
@@ -278,6 +282,7 @@
 		</header>
 
         <section class="map-section">
+            <img id="map" src="map.svg" alt="map"/>
         </section>
 
         <h2 class="subtitle">Textures are useful for the<br>selective perception of different categories</h2>
@@ -554,11 +559,27 @@ svg.append("circle")
     .stroke("firebrick");</code></pre>
             </figure>
 
+            <figure data="box27">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("nylon")
+    .lighter()
+    .shapeRendering("crispEdges");</code></pre>
+            </figure>
+
+            <figure data="box28">
+                <div class="box"></div>
+                <pre><code>textures.paths()
+    .d("squares")
+    .stroke("darkorange");</code></pre>
+            </figure>
+
+
         </section>
 
         <section class="custom">
-        <h2>Create custom patterns</h2>
-          <div id="italy"></div>
+          <h2>Create custom patterns</h2>
+          <div id="legend"></div>
           <pre><code>var t = textures.paths()
     .d(function(s) {
         return "M 0," + s*3/4 + " l " +
@@ -569,6 +590,7 @@ svg.append("circle")
     .strokeWidth(1)
     .thicker(2)
     .stroke("darkorange");</code></pre>
+          <!-- <div id="italy"></div> -->
         </section>
 
         <footer>
@@ -580,7 +602,7 @@ svg.append("circle")
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="textures.min.js" charset="utf-8"></script>
-  <script src="map.js" type="text/javascript"></script>
+  <!--<script src="map.js" type="text/javascript"></script>-->
   
   <script>
 
@@ -825,6 +847,21 @@ svg.append("circle")
         .stroke("firebrick");
     box("box26",t);
 
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("nylon")
+        .lighter()
+        .shapeRendering("crispEdges");
+    box("box27",t);
+
+    // ----------------------------------------------------------------- 
+  
+    var t = textures.paths()
+        .d("squares")
+        .stroke("darkorange");
+    box("box28",t);
+
   </script>
 
   <script>
@@ -920,9 +957,54 @@ svg.append("circle")
       }
     }
     
+  </script>
 
+  <script type="text/javascript">
+    var w = 150,
+        h = 170;
+    var svg = d3.select("#legend")
+        .append("svg")
+        .attr("width",w)
+        .attr("height", h);
 
-
+    svg.append("path")
+        .attr("d","M 15 15 l 120 0 l 0 120 l -120 0 Z")
+        .style({
+            "fill": "transparent",
+            "stroke": "darkorange",
+            "shape-rendering": "crispEdges",
+            "stroke-width": 2
+        });
+    svg.append("path")
+        .attr("d","M 45 0 l 0 150 M 75 0 l 0 150 M 105 0 l 0 150 M 0 45 l 150 0 M 0 75 l 150 0 M 0 105 l 150 0")
+        .style({
+            "stroke": "darkorange",
+            "stroke-dasharray": "5, 5",
+            "shape-rendering": "crispEdges",
+            "stroke-width": 1
+        });
+    svg.append("path")
+        .attr("d","M 15 105 L 75 45 L 135 105")
+        .style({
+            "fill": "transparent",
+            "stroke": "darkorange",
+            "shape-rendering": "crispEdges",
+            "stroke-width": 4
+        });
+    svg.append("text")
+        .text("s = size")
+        .attr({
+            "x": 75,
+            "y": 160,
+            "dy": 0,
+            "text-anchor": "middle"
+        })
+        .style({
+            "fill": "darkorange",
+            "font-family": "Inconsolata",
+            "font-size": 14,
+        })
+    
 
   </script>
 
