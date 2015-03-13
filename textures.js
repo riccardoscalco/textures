@@ -269,13 +269,21 @@
       id = void 0;
       svgPath = function(_) {
         switch (_) {
+          case "squares":
+            return (function(s) {
+              return "M " + s / 4 + " " + s / 4 + " l " + s / 2 + " 0 l 0 " + s / 2 + " l " + -s / 2 + " 0 Z";
+            })(size);
+          case "fog":
+            return (function(s) {
+              return "M " + s / 4 + " " + s / 4 + " l " + s / 2 + " 0 M " + s / 4 + " " + s / 2 + " l " + s / 2 + " 0 M " + s / 4 + " " + s * 3 / 4 + " l " + s / 2 + " 0";
+            })(size);
           case "waves":
             return (function(s) {
-              return "M 0 " + s / 2 + " c " + s / 8 + " " + -s / 4 + " , " + s * 3 / 8 + " " + -s / 4 + " , " + s / 2 + " 0 c " + s / 8 + " " + s / 4 + " , " + s * 3 / 8 + " " + s / 4 + " , " + s / 2 + " 0";
+              return "M 0 " + s / 2 + " c " + s / 8 + " " + -s / 4 + " , " + s * 3 / 8 + " " + -s / 4 + " , " + s / 2 + " 0 c " + s / 8 + " " + s / 4 + " , " + s * 3 / 8 + " " + s / 4 + " , " + s / 2 + " 0 M " + -s / 2 + " 0 c " + s / 8 + " " + s / 4 + " , " + s * 3 / 8 + " " + s / 4 + " , " + s / 2 + " 0 M " + s + " " + s / 2 + " c " + s / 8 + " " + -s / 4 + " , " + s * 3 / 8 + " " + -s / 4 + " , " + s / 2 + " 0";
             })(size);
           case "woven":
             return (function(s) {
-              return "M " + s / 4 + "," + s / 4 + "l" + s / 2 + "," + s / 2 + "M" + s * 3 / 4 + "," + s / 4 + "l" + s / 2 + "," + -s / 2 + "M" + s / 4 + "," + s * 3 / 4 + "l" + -s / 2 + "," + s / 2;
+              return "M " + s / 4 + "," + s / 4 + "l" + s / 2 + "," + s / 2 + "M" + s * 3 / 4 + "," + s / 4 + "l" + s / 2 + "," + -s / 2 + "M" + s / 4 + "," + s * 3 / 4 + "l" + -s / 2 + "," + s / 2 + " M " + -s / 4 + "," + s * 3 / 4 + "l" + s / 2 + "," + s / 2 + " M " + s * 3 / 4 + "," + -s / 4 + "l" + s / 2 + "," + s / 2;
             })(size);
           case "crosses":
             return (function(s) {
