@@ -129,6 +129,11 @@
                 stroke: #131313;
                 stroke-width: 1px;
             }
+
+            #map {
+                width: 100%;
+            }
+
             .prov {
                 stroke: oldlace;
                 stroke-width: 4px;
@@ -247,9 +252,18 @@
                 font-size: 30px;
             }
 
+            .usa h2 {
+                padding-top: 2em;
+                color: #343434;
+                font-size: 30px;                
+            }
+
             @media (max-width: 640px) {
                 .categories h2 {
-                    font-size: 25px;
+                    font-size: 20px;
+                }
+                .usa h2 {
+                    font-size: 20px;
                 }
             }
 
@@ -268,6 +282,32 @@
 /*
             #italy {
                 margin-top: 3em;
+            }*/
+
+            .usa {
+                background: darkorange;
+                text-align: center;
+            }
+
+            #usa {
+                width: 100%;
+                max-width: 960px;
+                margin-bottom: 5em;
+            }
+/*
+            .land {
+              fill: #222;
+            }
+
+            .county-boundary {
+              fill: none;
+              stroke: #fff;
+              stroke-width: .5px;
+            }
+
+            .state-boundary {
+              fill: none;
+              stroke: #fff;
             }*/
 
         </style>
@@ -405,6 +445,13 @@ svg.append("circle")
 
 		</section>
 
+        <section class="categories">
+          <h2>
+              Colors and textures can be combined<br> to have further levels of selection
+          </h2>
+          <div id="categories"></div>
+        </section>
+
 		<section class="circles">
 
 		    <h2>Circles</h2>
@@ -485,12 +532,9 @@ svg.append("circle")
 
         </section>
 
-        <section class="categories">
-          <h2>
-              From black - small - dots<br>
-              To white - big - stripes
-          </h2>
-          <div id="categories"></div>
+        <section class="usa">
+            <h2>Textures of increasing size can represent an order relation</h2>
+            <img id="usa" src="us.svg" alt="map"/>
         </section>
 
         <section class="paths">
@@ -603,6 +647,8 @@ svg.append("circle")
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="textures.min.js" charset="utf-8"></script>
   <!--<script src="map.js" type="text/javascript"></script>-->
+  <!--<script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>-->
+  <!--<script src="usa.js" type="text/javascript"></script>-->
   
   <script>
 
@@ -899,22 +945,29 @@ svg.append("circle")
         .attr("viewBox", "0 0 600 600")          // make it
         .attr("preserveAspectRatio", "xMidYMid"); // responsive
 
-    var t11 = textures.lines().thicker(),
-        t12 = textures.circles().thicker(),
-        t21 = textures.lines().thicker().stroke("oldlace"),
-        t22 = textures.circles().thicker().fill("oldlace"),
-        t31 = textures.lines().heavier(),
-        t32 = textures.circles().heavier(),
-        t41 = textures.lines().stroke("oldlace").heavier(),
-        t42 = textures.circles().fill("oldlace").heavier();
+    var t11 = textures.lines()
+          .stroke("oldlace"),
+        //t12 = textures.circles().thicker(),
+        t21 = textures.lines()
+          .stroke("oldlace")
+          .background("#343434"),
+        //t22 = textures.circles().thicker().fill("oldlace"),
+        //t31 = textures.lines().heavier(),
+        t32 = textures.circles()
+          .fill("oldlace"),
+        //t41 = textures.lines().stroke("oldlace").heavier(),
+        t42 = textures.circles()
+          .fill("oldlace")
+          .background("#343434");
+
 
     svg.call(t11);
-    svg.call(t12);
+    //svg.call(t12);
     svg.call(t21);
-    svg.call(t22);
-    svg.call(t31);
+    //svg.call(t22);
+    //svg.call(t31);
     svg.call(t32);
-    svg.call(t41);
+    //svg.call(t41);
     svg.call(t42);    
 
     // svg.append("path")
@@ -944,7 +997,8 @@ svg.append("circle")
 
     var g = svg.append("g");
     var getRandomTextures, i, j, k, l, tt;
-    tt = [t11, t12, t21, t22, t31, t32, t41, t42];
+    //tt = [t11, t12, t21, t22, t31, t32, t41, t42];
+    tt = [t11, t21, t32, t42];
     getRandomTextures = function() {
       return tt[Math.floor(Math.random() * tt.length)].url();
     };
@@ -1010,19 +1064,19 @@ svg.append("circle")
 
   <!-- Make it responsive -->
   <script>
-    var chart = $("#map"),
-        aspect = chart.width() / chart.height(),
-        container = chart.parent();
+    // var chart = $("#map"),
+    //     aspect = chart.width() / chart.height(),
+    //     container = chart.parent();
 
     var chart1 = $("#square"),
         aspect1 = chart1.width() / chart1.height(),
         container1 = chart1.parent();
 
     $(window).on("resize", function() {
-        var targetWidth = container.width();
+        //var targetWidth = container.width();
         var targetWidth1 = container1.width();
-        chart.attr("width", targetWidth);
-        chart.attr("height", Math.round(targetWidth / aspect));
+        //chart.attr("width", targetWidth);
+        //chart.attr("height", Math.round(targetWidth / aspect));
         chart1.attr("width", targetWidth1);
         chart1.attr("height", Math.round(targetWidth1 / aspect1));
     }).trigger("resize");
