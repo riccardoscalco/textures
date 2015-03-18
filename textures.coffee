@@ -30,7 +30,7 @@ umd ->
     id = rand()
 
     circles = () ->
-      g = this.append "defs"
+      g = @append "defs"
           .append "pattern"
           .attr
             id: id
@@ -177,7 +177,7 @@ umd ->
           "M #{s/2}, 0 l 0, #{s}"
 
     lines = () ->
-      g = this.append "defs"
+      g = @append "defs"
           .append "pattern"
           .attr
             id: id
@@ -315,7 +315,7 @@ umd ->
     paths = () ->
       path = svgPath d
       id = rand()
-      g = this.append "defs"
+      g = @append "defs"
         .append "pattern"
         .attr
           id: id
