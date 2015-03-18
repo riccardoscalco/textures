@@ -2,7 +2,6 @@
   "name": "textures",
   "version": "1.0.0",
   "description": "SVG patterns for Data Visualization",
-  "main": "textures.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/riccardoscalco/textures.git"
@@ -12,7 +11,6 @@
     "svg",
     "dataviz"
   ],
-  "main": "textures.js",
   "author": "riccardo scalco",
   "license": "BSD",
   "bugs": {
