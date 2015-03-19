@@ -1,0 +1,20 @@
+{
+  "name": "textures",
+  "version": "1.0.1",
+  "description": "SVG patterns for Data Visualization",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riccardoscalco/textures.git"
+  },
+  "keywords": [
+    "d3",
+    "svg",
+    "dataviz"
+  ],
+  "author": "riccardo scalco",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/riccardoscalco/textures/issues"
+  },
+  "homepage": "https://github.com/riccardoscalco/textures"
+}
