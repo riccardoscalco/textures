@@ -1,18 +1,25 @@
-root = exports ? this
+
 
 # helper function
 rand = () ->
-  (Math.random().toString(36)+"00000000000000000")
-    .replace(/[^a-z]+/g, "")
-    .slice(0, 5)
+  "#{Math.random().toString(36)}00000000000000000"
+    .replace /[^a-z]+/g, ""
+    .slice 0, 5
 
-# global object
-root.textures = {
-  
+umd = (factory) ->
+  if typeof exports is 'object'
+    module.exports = factory()
+  else if typeof define is 'function' and define.amd
+    define [], factory
+  else
+    @textures = factory()
+
+# global factory
+umd ->
+
   # circles ------------------------------------------------------------
 
-  circles : () ->
-
+  circles: () ->
     size = 20
     background = ""
     radius = 2
@@ -23,33 +30,37 @@ root.textures = {
     id = rand()
 
     circles = () ->
-      g = this.append("defs")
-          .append("pattern")
-          .attr("id", id)
-          .attr("patternUnits", "userSpaceOnUse")
-          .attr("width", size)
-          .attr("height", size)
+      g = @append "defs"
+          .append "pattern"
+          .attr
+            id: id
+            patternUnits: "userSpaceOnUse"
+            width: size
+            height: size
       if background
-        g.append("rect")
-            .attr("width", size)
-            .attr("height", size)
-            .attr("fill", background)
-      g.append("circle")
-          .attr("cx", size / 2)
-          .attr("cy", size / 2)
-          .attr("r", radius)
-          .attr("fill", fill)
-          .attr("stroke", stroke)
-          .attr("stroke-width", strokeWidth)
+        g.append "rect"
+          .attr
+            width: size
+            height: size
+            fill: background
+      g.append "circle"
+        .attr
+          cx: size / 2
+          cy: size / 2
+          r: radius
+          fill: fill
+          stroke: stroke
+          "stroke-width": strokeWidth
       if complement
         for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
-          g.append("circle")
-              .attr("cx", corner[0])
-              .attr("cy", corner[1])
-              .attr("r", radius)
-              .attr("fill", fill)
-              .attr("stroke", stroke)
-              .attr("stroke-width", strokeWidth)
+          g.append "circle"
+            .attr
+              cx: corner[0]
+              cy: corner[1]
+              r: radius
+              fill: fill
+              stroke: stroke
+              "stroke-width": strokeWidth
 
     circles.heavier = (_) ->
       if not arguments.length
@@ -115,14 +126,14 @@ root.textures = {
         circles
 
     circles.url = () ->
-      "url(#" + circles.id() + ")"
+      "url(##{id})"
 
     circles
 
-  # lines --------------------------------------------------------------
-  
-  lines : () ->
 
+  # lines --------------------------------------------------------------
+
+  lines: () ->
     size = 20
     strokeWidth = 2
     stroke = "#343434"
@@ -133,38 +144,60 @@ root.textures = {
 
     path = (orientation) ->
       switch orientation
-        when "0/8" then do (s=size) -> "M "+s/2+", 0 l 0, "+s
-        when "vertical" then do (s=size) -> "M "+s/2+", 0 l 0, "+s
-        when "1/8" then do (s=size) -> "M "+s/4+",0 l "+s/2+","+s+" M "+-s/4+",0 l "+s/2+","+s+" M "+s*3/4+",0 l "+s/2+","+s
-        when "2/8" then do (s=size) -> "M 0,"+s+" l "+s+","+-s+" M "+-s/4+","+s/4+" l "+s/2+","+-s/2+" M "+3/4*s+","+5/4*s+" l "+s/2+","+-s/2
-        when "diagonal" then do (s=size) -> "M 0,"+s+" l "+s+","+-s+" M "+-s/4+","+s/4+" l "+s/2+","+-s/2+" M "+3/4*s+","+5/4*s+" l "+s/2+","+-s/2
-        when "3/8" then do (s=size) -> "M 0,"+3/4*s+" l "+s+","+-s/2+" M 0,"+s/4+" l "+s+","+-s/2+" M 0,"+s*5/4+" l "+s+","+-s/2
-        when "4/8" then do (s=size) -> "M 0,"+s/2+" l "+s+",0"
-        when "horizontal" then do (s=size) -> "M 0,"+s/2+" l "+s+",0"
-        when "5/8" then do (s=size) -> "M 0,"+-s/4+" l "+s+","+s/2+"M 0,"+s/4+" l "+s+","+s/2+"M 0,"+s*3/4+" l "+s+","+s/2
-        when "6/8" then do (s=size) -> "M 0,0 l "+s+","+s+" M "+-s/4+","+3/4*s+" l "+s/2+","+s/2+" M "+s*3/4+","+-s/4+" l "+s/2+","+s/2
-        when "7/8" then do (s=size) -> "M "+-s/4+",0 l "+s/2+","+s+" M "+s/4+",0 l "+s/2+","+s+" M "+s*3/4+",0 l "+s/2+","+s
-        else do (s=size) -> "M "+s/2+", 0 l 0, "+s
+        when "0/8" then do (s=size) ->
+          "M #{s/2}, 0 l 0, #{s}"
+        when "vertical" then do (s=size) ->
+          "M #{s/2}, 0 l 0, #{s}"
+        when "1/8" then do (s=size) ->
+          """M #{s/4},0 l #{s/2},#{s} M #{-s/4},0 l #{s/2},#{s}
+             M #{s*3/4},0 l #{s/2},#{s}"""
+        when "2/8" then do (s=size) ->
+          """M 0,#{s} l #{s},#{-s} M #{-s/4},#{s/4} l #{s/2},#{-s/2}
+             M #{3/4*s},#{5/4*s} l #{s/2},#{-s/2}"""
+        when "diagonal" then do (s=size) ->
+          """M 0,#{s} l #{s},#{-s} M #{-s/4},#{s/4} l #{s/2},#{-s/2}
+             M #{3/4*s},#{5/4*s} l #{s/2},#{-s/2}"""
+        when "3/8" then do (s=size) ->
+          """M 0,#{3/4*s} l #{s},#{-s/2} M 0,#{s/4} l #{s},#{-s/2}
+             M 0,#{s*5/4} l #{s},#{-s/2}"""
+        when "4/8" then do (s=size) ->
+          "M 0,#{s/2} l #{s},0"
+        when "horizontal" then do (s=size) ->
+          "M 0,#{s/2} l #{s},0"
+        when "5/8" then do (s=size) ->
+          """M 0,#{-s/4} l #{s},#{s/2}M 0,#{s/4} l #{s},#{s/2}
+             M 0,#{s*3/4} l #{s},#{s/2}"""
+        when "6/8" then do (s=size) ->
+          """M 0,0 l #{s},#{s} M #{-s/4},#{3/4*s} l #{s/2},#{s/2}
+             M #{s*3/4},#{-s/4} l #{s/2},#{s/2}"""
+        when "7/8" then do (s=size) ->
+          """M #{-s/4},0 l #{s/2},#{s} M #{s/4},0 l #{s/2},#{s}
+             M #{s*3/4},0 l #{s/2},#{s}"""
+        else do (s=size) ->
+          "M #{s/2}, 0 l 0, #{s}"
 
     lines = () ->
-      g = this.append("defs")
-          .append("pattern")
-          .attr("id", id)
-          .attr("patternUnits", "userSpaceOnUse")
-          .attr("width", size)
-          .attr("height", size)
+      g = @append "defs"
+          .append "pattern"
+          .attr
+            id: id
+            patternUnits: "userSpaceOnUse"
+            width: size
+            height: size
       if background
-        g.append("rect")
-            .attr("width", size)
-            .attr("height", size)
-            .attr("fill", background)
+        g.append "rect"
+          .attr
+            width: size
+            height: size
+            fill: background
       for o in orientation
-        g.append("path")
-            .attr("d", path(o))
-            .attr("stroke-width", strokeWidth)
-            .attr("shape-rendering", shapeRendering)
-            .attr("stroke", stroke)
-            .attr("stroke-linecap", "square")
+        g.append "path"
+          .attr
+            d: path o
+            "stroke-width": strokeWidth
+            "shape-rendering": shapeRendering
+            stroke: stroke
+            "stroke-linecap": "square"
 
     lines.background = (_) ->
       background = _
@@ -226,14 +259,14 @@ root.textures = {
         lines
 
     lines.url = () ->
-      "url(#" + lines.id() + ")"
-        
+      "url(##{id})"
+
     lines
 
-  # path ---------------------------------------------------------------
-  
-  paths : () ->
 
+  # path ---------------------------------------------------------------
+
+  paths: () ->
     size = 20
     height = 1
     width = 1
@@ -244,7 +277,7 @@ root.textures = {
     shapeRendering = "auto"
     fill = "transparent"
     id = undefined
-    
+
     # Contributions with custom paths are welcome,
     # for example have a look at the "hexagons" path below
     # (`width` and `height` are in units of `size`)
@@ -252,44 +285,57 @@ root.textures = {
     svgPath = (_) ->
       switch _
         when "squares" then do (s=size) ->
-          "M "+s/4+" "+s/4+" l "+s/2+" 0 l 0 "+s/2+" l "+-s/2+" 0 Z"
+          "M #{s/4} #{s/4} l #{s/2} 0 l 0 #{s/2} l #{-s/2} 0 Z"
         when "nylon" then do (s=size) ->
-          "M 0 "+s/4+" l "+s/4+" 0 l 0 "+-s/4+" M "+s*3/4+" "+s+" l 0 "+-s/4+" l "+s/4+" 0 M "+s/4+" "+s/2+" l 0 "+s/4+" l "+s/4+" 0 M "+s/2+" "+s/4+" l "+s/4+" 0 l 0 "+s/4
+          """M 0 #{s/4} l #{s/4} 0 l 0 #{-s/4} M #{s*3/4} #{s} l 0 #{-s/4}
+             l #{s/4} 0 M #{s/4} #{s/2} l 0 #{s/4} l #{s/4} 0 M #{s/2} #{s/4}
+             l #{s/4} 0 l 0 #{s/4}"""
         when "waves" then do (s=size) ->
-          "M 0 "+s/2+" c "+s/8+" "+-s/4+" , "+s*3/8+" "+-s/4+" , "+s/2+" 0 c "+s/8+" "+s/4+" , "+s*3/8+" "+s/4+" , "+s/2+" 0 M "+-s/2+" "+s/2+" c "+s/8+" "+s/4+" , "+s*3/8+" "+s/4+" , "+s/2+" 0 M "+s+" "+s/2+" c "+s/8+" "+-s/4+" , "+s*3/8+" "+-s/4+" , "+s/2+" 0"
+          """M 0 #{s/2} c #{s/8} #{-s/4} , #{s*3/8} #{-s/4} , #{s/2} 0
+             c #{s/8} #{s/4} , #{s*3/8} #{s/4} , #{s/2} 0 M #{-s/2} #{s/2}
+             c #{s/8} #{s/4} , #{s*3/8} #{s/4} , #{s/2} 0 M #{s} #{s/2}
+             c #{s/8} #{-s/4} , #{s*3/8} #{-s/4} , #{s/2} 0"""
         when "woven" then do (s=size) ->
-          "M "+s/4+","+s/4+"l"+s/2+","+s/2+"M"+s*3/4+","+s/4+"l"+s/2+","+-s/2+"M"+s/4+","+s*3/4+"l"+-s/2+","+s/2+"M"+s*3/4+","+s*5/4+"l"+s/2+","+-s/2+"M"+-s/4+","+s/4+"l"+s/2+","+-s/2
+          """M #{s/4},#{s/4}l#{s/2},#{s/2}M#{s*3/4},#{s/4}l#{s/2},#{-s/2}
+             M#{s/4},#{s*3/4}l#{-s/2},#{s/2}M#{s*3/4},#{s*5/4}l#{s/2},#{-s/2}
+             M#{-s/4},#{s/4}l#{s/2},#{-s/2}"""
         when "crosses" then do (s=size) ->
-          "M "+s/4+","+s/4+"l"+s/2+","+s/2+"M"+s/4+","+s*3/4+"l"+s/2+","+-s/2
+          "M #{s/4},#{s/4}l#{s/2},#{s/2}M#{s/4},#{s*3/4}l#{s/2},#{-s/2}"
         when "caps" then do (s=size) ->
-          "M "+s/4+","+s*3/4+"l"+s/4+","+-s/2+"l"+s/4+","+s/2
+          "M #{s/4},#{s*3/4}l#{s/4},#{-s/2}l#{s/4},#{s/2}"
         when "hexagons" then do (s=size) ->
           width = 3
           height = Math.sqrt(3)
-          "M "+s+",0 l "+s+",0 l "+s/2+","+(s*Math.sqrt(3)/2)+" l "+(-s/2)+","+(s*Math.sqrt(3)/2)+" l "+(-s)+",0 l "+(-s/2)+","+(-s*Math.sqrt(3)/2)+" Z M 0,"+s*Math.sqrt(3)/2+" l "+s/2+",0 M "+(3*s)+","+s*Math.sqrt(3)/2+" l "+(-s/2)+",0"
-        else _(size)
+          """M #{s},0 l #{s},0 l #{s/2},#{(s*Math.sqrt(3)/2)}
+             l #{(-s/2)},#{(s*Math.sqrt(3)/2)} l #{(-s)},0
+             l #{(-s/2)},#{(-s*Math.sqrt(3)/2)} Z M 0,#{s*Math.sqrt(3)/2}
+             l #{s/2},0 M #{(3*s)},#{s*Math.sqrt(3)/2} l #{(-s/2)},0"""
+        else _ size
 
     paths = () ->
-      path = svgPath(d)
+      path = svgPath d
       id = rand()
-      g = this.append("defs")
-          .append("pattern")
-          .attr("id", id)
-          .attr("patternUnits", "userSpaceOnUse")
-          .attr("width", size * width)
-          .attr("height", size * height)
+      g = @append "defs"
+        .append "pattern"
+        .attr
+          id: id
+          patternUnits: "userSpaceOnUse"
+          width: size * width
+          height: size * height
       if background
-        g.append("rect")
-            .attr("width", size * width)
-            .attr("height", size * height)
-            .attr("fill", background)
-      g.append("path")
-          .attr("d", path)
-          .attr("fill", fill)
-          .attr("stroke-width", strokeWidth)
-          .attr("shape-rendering", shapeRendering)
-          .attr("stroke", stroke)
-          .attr("stroke-linecap", "square")
+        g.append "rect"
+          .attr
+            width: size * width
+            height: size * height
+            fill: background
+      g.append "path"
+        .attr
+          d: path
+          fill: fill
+          "stroke-width": strokeWidth
+          "shape-rendering": shapeRendering
+          stroke: stroke
+          "stroke-linecap": "square"
 
     paths.background = (_) ->
       background = _
@@ -351,8 +397,6 @@ root.textures = {
         paths
 
     paths.url = () ->
-      "url(#" + paths.id() + ")"
-        
-    paths
+      "url(##{id})"
 
-}
+    paths
