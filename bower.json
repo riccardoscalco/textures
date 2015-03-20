@@ -1,0 +1,24 @@
+{
+  "name": "textures",
+  "main": "textures.min.js",
+  "version": "1.0.2",
+  "homepage": "https://github.com/riccardoscalco/textures",
+  "authors": [
+    "Riccardo Scalco <riccardo.scalco@gmail.com>"
+  ],
+  "description": "SVG patterns for Data Visualization",
+  "keywords": [
+    "d3",
+    "svg",
+    "patterns",
+    "dataviz"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
