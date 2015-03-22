@@ -1,1 +1,1 @@
-module.exports = require('./textures.js').textures
+module.exports = require('./textures.js')
