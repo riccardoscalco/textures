@@ -27,6 +27,7 @@ umd ->
     fill = "#343434"
     stroke = "#343434"
     strokeWidth = 0
+    strokeOpacity = 1
     id = rand()
 
     circles = () ->
@@ -51,6 +52,7 @@ umd ->
           fill: fill
           stroke: stroke
           "stroke-width": strokeWidth
+          "stroke-opacity": strokeOpacity
       if complement
         for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
           g.append "circle"
@@ -61,6 +63,7 @@ umd ->
               fill: fill
               stroke: stroke
               "stroke-width": strokeWidth
+              "stroke-opacity": strokeOpacity
 
     circles.heavier = (_) ->
       if not arguments.length
@@ -88,6 +91,18 @@ umd ->
         size = size / 2
       else
         size = if _ then size / ( 2 * _ ) else size / 2
+      circles
+
+    circles.transparentize = (_) ->
+      strokeOpacity -= 0.1
+      if strokeOpacity < 0
+        strokeOpacity = 0
+      circles
+
+    circles.opacify = (_) ->
+      strokeOpacity += 0.1
+      if strokeOpacity > 1
+        strokeOpacity = 1
       circles
 
     circles.background = (_) ->
@@ -118,6 +133,10 @@ umd ->
       strokeWidth = _
       circles
 
+    circles.strokeOpacity = (_) ->
+      strokeOpacity = _
+      circles
+
     circles.id = (_) ->
       if not arguments.length
         id
@@ -136,6 +155,7 @@ umd ->
   lines: () ->
     size = 20
     strokeWidth = 2
+    strokeOpacity = 1
     stroke = "#343434"
     id = rand()
     background = ""
@@ -195,6 +215,7 @@ umd ->
           .attr
             d: path o
             "stroke-width": strokeWidth
+            "stroke-opacity": strokeOpacity
             "shape-rendering": shapeRendering
             stroke: stroke
             "stroke-linecap": "square"
@@ -235,6 +256,18 @@ umd ->
         size = if _ then size / ( 2 * _ ) else size / 2
       lines
 
+    lines.transparentize = (_) ->
+      strokeOpacity -= 0.1
+      if strokeOpacity < 0
+        strokeOpacity = 0
+      lines
+
+    lines.opacify = (_) ->
+      strokeOpacity += 0.1
+      if strokeOpacity > 1
+        strokeOpacity = 1
+      lines
+
     lines.orientation = (args...) ->
       orientation = args
       lines
@@ -249,6 +282,10 @@ umd ->
 
     lines.strokeWidth = (_) ->
       strokeWidth = _
+      lines
+
+    lines.strokeOpacity = (_) ->
+      strokeOpacity = _
       lines
 
     lines.id = (_) ->
@@ -271,6 +308,7 @@ umd ->
     height = 1
     width = 1
     strokeWidth = 2
+    strokeOpacity = 1
     stroke = "#343434"
     background = ""
     d = ""
@@ -373,6 +411,18 @@ umd ->
         size = if _ then size / ( 2 * _ ) else size / 2
       paths
 
+    paths.transparentize = (_) ->
+      strokeOpacity -= 0.1
+      if strokeOpacity < 0
+        strokeOpacity = 0
+      paths
+
+    paths.opacify = (_) ->
+      strokeOpacity += 0.1
+      if strokeOpacity > 1
+        strokeOpacity = 1
+      paths
+
     paths.d = (_) ->
       d = _
       paths
@@ -387,6 +437,10 @@ umd ->
 
     paths.strokeWidth = (_) ->
       strokeWidth = _
+      paths
+
+    paths.strokeOpacity = (_) ->
+      strokeOpacity = _
       paths
 
     paths.id = (_) ->

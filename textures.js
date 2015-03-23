@@ -20,7 +20,7 @@
   umd(function() {
     return {
       circles: function() {
-        var background, circles, complement, fill, id, radius, size, stroke, strokeWidth;
+        var background, circles, complement, fill, id, radius, size, stroke, strokeOpacity, strokeWidth;
         size = 20;
         background = "";
         radius = 2;
@@ -28,6 +28,7 @@
         fill = "#343434";
         stroke = "#343434";
         strokeWidth = 0;
+        strokeOpacity = 1;
         id = rand();
         circles = function() {
           var corner, g, i, len, ref, results;
@@ -50,7 +51,8 @@
             r: radius,
             fill: fill,
             stroke: stroke,
-            "stroke-width": strokeWidth
+            "stroke-width": strokeWidth,
+            "stroke-opacity": strokeOpacity
           });
           if (complement) {
             ref = [[0, 0], [0, size], [size, 0], [size, size]];
@@ -63,7 +65,8 @@
                 r: radius,
                 fill: fill,
                 stroke: stroke,
-                "stroke-width": strokeWidth
+                "stroke-width": strokeWidth,
+                "stroke-opacity": strokeOpacity
               }));
             }
             return results;
@@ -101,6 +104,20 @@
           }
           return circles;
         };
+        circles.transparentize = function(_) {
+          strokeOpacity -= 0.1;
+          if (strokeOpacity < 0) {
+            strokeOpacity = 0;
+          }
+          return circles;
+        };
+        circles.opacify = function(_) {
+          strokeOpacity += 0.1;
+          if (strokeOpacity > 1) {
+            strokeOpacity = 1;
+          }
+          return circles;
+        };
         circles.background = function(_) {
           background = _;
           return circles;
@@ -129,6 +146,10 @@
           strokeWidth = _;
           return circles;
         };
+        circles.strokeOpacity = function(_) {
+          strokeOpacity = _;
+          return circles;
+        };
         circles.id = function(_) {
           if (!arguments.length) {
             return id;
@@ -143,9 +164,10 @@
         return circles;
       },
       lines: function() {
-        var background, id, lines, orientation, path, shapeRendering, size, stroke, strokeWidth;
+        var background, id, lines, orientation, path, shapeRendering, size, stroke, strokeOpacity, strokeWidth;
         size = 20;
         strokeWidth = 2;
+        strokeOpacity = 1;
         stroke = "#343434";
         id = rand();
         background = "";
@@ -224,6 +246,7 @@
             results.push(g.append("path").attr({
               d: path(o),
               "stroke-width": strokeWidth,
+              "stroke-opacity": strokeOpacity,
               "shape-rendering": shapeRendering,
               stroke: stroke,
               "stroke-linecap": "square"
@@ -271,6 +294,20 @@
           }
           return lines;
         };
+        lines.transparentize = function(_) {
+          strokeOpacity -= 0.1;
+          if (strokeOpacity < 0) {
+            strokeOpacity = 0;
+          }
+          return lines;
+        };
+        lines.opacify = function(_) {
+          strokeOpacity += 0.1;
+          if (strokeOpacity > 1) {
+            strokeOpacity = 1;
+          }
+          return lines;
+        };
         lines.orientation = function() {
           var args;
           args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
@@ -289,6 +326,10 @@
           strokeWidth = _;
           return lines;
         };
+        lines.strokeOpacity = function(_) {
+          strokeOpacity = _;
+          return lines;
+        };
         lines.id = function(_) {
           if (!arguments.length) {
             return id;
@@ -303,11 +344,12 @@
         return lines;
       },
       paths: function() {
-        var background, d, fill, height, id, paths, shapeRendering, size, stroke, strokeWidth, svgPath, width;
+        var background, d, fill, height, id, paths, shapeRendering, size, stroke, strokeOpacity, strokeWidth, svgPath, width;
         size = 20;
         height = 1;
         width = 1;
         strokeWidth = 2;
+        strokeOpacity = 1;
         stroke = "#343434";
         background = "";
         d = "";
@@ -416,6 +458,20 @@
           }
           return paths;
         };
+        paths.transparentize = function(_) {
+          strokeOpacity -= 0.1;
+          if (strokeOpacity < 0) {
+            strokeOpacity = 0;
+          }
+          return paths;
+        };
+        paths.opacify = function(_) {
+          strokeOpacity += 0.1;
+          if (strokeOpacity > 1) {
+            strokeOpacity = 1;
+          }
+          return paths;
+        };
         paths.d = function(_) {
           d = _;
           return paths;
@@ -430,6 +486,10 @@
         };
         paths.strokeWidth = function(_) {
           strokeWidth = _;
+          return paths;
+        };
+        paths.strokeOpacity = function(_) {
+          strokeOpacity = _;
           return paths;
         };
         paths.id = function(_) {
