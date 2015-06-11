@@ -1,7 +1,6 @@
 {
   "name": "textures",
   "main": "textures.min.js",
-  "version": "1.0.2",
   "homepage": "https://github.com/riccardoscalco/textures",
   "authors": [
     "Riccardo Scalco <riccardo.scalco@gmail.com>"
