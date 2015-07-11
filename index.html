@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Textures.js</title>
 		<meta name="description" content="A JavaScript Library for creating SVG patterns" />
 		<meta name="keywords" content="svg, patterns, javascript, d3, textures" />
@@ -14,7 +14,7 @@
 		<style>
 
 			::selection {
-			  color: #343434; 
+			  color: #343434;
 			  background: #eee;
 			}
 
@@ -255,7 +255,7 @@
             .usa h2 {
                 padding-top: 2em;
                 color: #343434;
-                font-size: 30px;                
+                font-size: 30px;
             }
 
             @media (max-width: 640px) {
@@ -277,7 +277,7 @@
 
             #legend {
                 padding-top: 10px;
-                margin-bottom: 2em;                
+                margin-bottom: 2em;
             }
 /*
             #italy {
@@ -322,7 +322,7 @@
 		</header>
 
         <section class="map-section">
-            <img id="map" src="map.svg" alt="map"/>
+            <img id="map" src="map.pic.png" alt="map"/>
         </section>
 
         <h2 class="subtitle">Textures are useful for the<br>selective perception of different categories</h2>
@@ -534,7 +534,7 @@ svg.append("circle")
 
         <section class="usa">
             <h2>Textures of increasing size can represent an order relation</h2>
-            <img id="usa" src="us.svg" alt="map"/>
+            <img id="usa" src="us.pic.png" alt="map"/>
         </section>
 
         <section class="paths">
@@ -649,7 +649,7 @@ svg.append("circle")
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
   <!--<script src="http://d3js.org/topojson.v1.min.js"></script>-->
   <script src="textures.min.js" charset="utf-8"></script>
-  
+
   <script>
 
     var box = function(id, t) {
@@ -671,7 +671,7 @@ svg.append("circle")
 
     var t = textures.lines();
     box("box1",t);
-    
+
     // -----------------------------------------------------------------
 
     var t = textures.lines()
@@ -764,13 +764,13 @@ svg.append("circle")
     var t = textures.circles();
     box("box12",t);
 
-    // -----------------------------------------------------------------    
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .heavier();
     box("box12_1",t);
 
-    // ----------------------------------------------------------------- 
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .lighter();
@@ -782,7 +782,7 @@ svg.append("circle")
         .thicker();
     box("box12_3",t);
 
-    // ----------------------------------------------------------------- 
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .thinner();
@@ -800,13 +800,13 @@ svg.append("circle")
         .complement();
     box("box14",t);
 
-    // -----------------------------------------------------------------    
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .radius(4);
     box("box15",t);
 
-    // -----------------------------------------------------------------    
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .radius(4)
@@ -814,7 +814,7 @@ svg.append("circle")
         .strokeWidth(2);
     box("box16",t);
 
-    // -----------------------------------------------------------------    
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .radius(4)
@@ -824,7 +824,7 @@ svg.append("circle")
         .complement();
     box("box17",t);
 
-    // -----------------------------------------------------------------    
+    // -----------------------------------------------------------------
 
     var t = textures.circles()
         .size(10)
@@ -833,8 +833,8 @@ svg.append("circle")
         .background("darkorange");
     box("box18",t);
 
-    // -----------------------------------------------------------------    
-    
+    // -----------------------------------------------------------------
+
     // var d = function(s) {
     //     return "M 0," + s*3/4 + " l " +
     //       s/2 + "," + -s/2 + " l " +
@@ -847,12 +847,12 @@ svg.append("circle")
     //     .stroke("darkorange");
     // box("box20",t);
 
-    // // ----------------------------------------------------------------- 
+    // // -----------------------------------------------------------------
 
-    // box("box21",t.lighter().thicker().stroke("firebrick"));  
+    // box("box21",t.lighter().thicker().stroke("firebrick"));
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("hexagons")
         .size(8)
@@ -860,16 +860,16 @@ svg.append("circle")
         .stroke("darkorange");
     box("box22",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("crosses")
         .lighter()
         .thicker();
     box("box23",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("caps")
         .lighter()
@@ -877,32 +877,32 @@ svg.append("circle")
         .stroke("darkorange");
     box("box24",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("woven")
         .lighter()
         .thicker();
     box("box25",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("waves")
         .thicker()
         .stroke("firebrick");
     box("box26",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("nylon")
         .lighter()
         .shapeRendering("crispEdges");
     box("box27",t);
 
-    // ----------------------------------------------------------------- 
-  
+    // -----------------------------------------------------------------
+
     var t = textures.paths()
         .d("squares")
         .stroke("darkorange");
@@ -968,14 +968,14 @@ svg.append("circle")
     //svg.call(t31);
     svg.call(t32);
     //svg.call(t41);
-    svg.call(t42);    
+    svg.call(t42);
 
     // svg.append("path")
     //     .attr("d","M 0 0 l 140 0 l 0 140 l -140 0 Z")
     //     .style("fill", t11.url());
     // svg.append("path")
     //     .attr("d","M 140 0 l 140 0 l 0 140 l -140 0 Z")
-    //     .style("fill", t12.url());  
+    //     .style("fill", t12.url());
     // svg.append("path")
     //     .attr("d","M 0 140 l 140 0 l 0 140 l -140 0 Z")
     //     .style("fill", t21.url());
@@ -1010,7 +1010,7 @@ svg.append("circle")
             .style("fill", getRandomTextures());
       }
     }
-    
+
   </script>
 
   <script type="text/javascript">
@@ -1058,7 +1058,7 @@ svg.append("circle")
             "font-family": "Inconsolata",
             "font-size": 14,
         })
-    
+
 
   </script>
 
