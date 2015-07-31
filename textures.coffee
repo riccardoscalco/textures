@@ -22,11 +22,14 @@ umd ->
   circles: () ->
     size = 20
     background = ""
+    backgroundOpacity = 1
     radius = 2
     complement = false
     fill = "#343434"
+    fillOpacity = 1
     stroke = "#343434"
     strokeWidth = 0
+    strokeOpacity = 1
     id = rand()
 
     circles = () ->
@@ -43,14 +46,17 @@ umd ->
             width: size
             height: size
             fill: background
+            "fill-opacity": backgroundOpacity
       g.append "circle"
         .attr
           cx: size / 2
           cy: size / 2
           r: radius
           fill: fill
+          "fill-opacity": fillOpacity
           stroke: stroke
           "stroke-width": strokeWidth
+          "stroke-opacity": strokeOpacity
       if complement
         for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
           g.append "circle"
@@ -59,8 +65,10 @@ umd ->
               cy: corner[1]
               r: radius
               fill: fill
+              "fill-opacity": fillOpacity
               stroke: stroke
               "stroke-width": strokeWidth
+              "stroke-opacity": strokeOpacity
 
     circles.heavier = (_) ->
       if not arguments.length
@@ -94,6 +102,10 @@ umd ->
       background = _
       circles
 
+    circles.backgroundOpacity = (_) ->
+      backgroundOpacity = _
+      circles
+
     circles.size = (_) ->
       size = _
       circles
@@ -110,12 +122,20 @@ umd ->
       fill = _
       circles
 
+    circles.fillOpacity = (_) ->
+      fillOpacity = _
+      circles
+
     circles.stroke = (_) ->
       stroke = _
       circles
 
     circles.strokeWidth = (_) ->
       strokeWidth = _
+      circles
+
+    circles.strokeOpacity = (_) ->
+      strokeOpacity = _
       circles
 
     circles.id = (_) ->
@@ -137,8 +157,10 @@ umd ->
     size = 20
     strokeWidth = 2
     stroke = "#343434"
+    strokeOpacity = 1
     id = rand()
     background = ""
+    backgroundOpacity = 1
     orientation = ["diagonal"]
     shapeRendering = "auto"
 
@@ -190,6 +212,7 @@ umd ->
             width: size
             height: size
             fill: background
+            "fill-opacity": backgroundOpacity
       for o in orientation
         g.append "path"
           .attr
@@ -197,10 +220,15 @@ umd ->
             "stroke-width": strokeWidth
             "shape-rendering": shapeRendering
             stroke: stroke
+            "stroke-opacity": strokeOpacity
             "stroke-linecap": "square"
 
     lines.background = (_) ->
       background = _
+      lines
+
+    lines.backgroundOpacity = (_) ->
+      backgroundOpacity = _
       lines
 
     lines.shapeRendering = (_) ->
@@ -247,6 +275,10 @@ umd ->
       stroke = _
       lines
 
+    lines.strokeOpacity = (_) ->
+      strokeOpacity = _
+      lines
+
     lines.strokeWidth = (_) ->
       strokeWidth = _
       lines
@@ -272,7 +304,9 @@ umd ->
     width = 1
     strokeWidth = 2
     stroke = "#343434"
+    strokeOpacity = 1
     background = ""
+    backgroundOpacity = 1
     d = ""
     shapeRendering = "auto"
     fill = "transparent"
@@ -328,6 +362,7 @@ umd ->
             width: size * width
             height: size * height
             fill: background
+            "fill-opacity": backgroundOpacity
       g.append "path"
         .attr
           d: path
@@ -335,10 +370,15 @@ umd ->
           "stroke-width": strokeWidth
           "shape-rendering": shapeRendering
           stroke: stroke
+          "stroke-opacity": strokeOpacity
           "stroke-linecap": "square"
 
     paths.background = (_) ->
       background = _
+      paths
+
+    paths.backgroundOpacity = (_) ->
+      backgroundOpacity = _
       paths
 
     paths.shapeRendering = (_) ->
@@ -387,6 +427,10 @@ umd ->
 
     paths.strokeWidth = (_) ->
       strokeWidth = _
+      paths
+
+    paths.strokeOpacity = (_) ->
+      strokeOpacity = _
       paths
 
     paths.id = (_) ->
