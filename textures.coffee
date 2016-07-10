@@ -29,38 +29,34 @@ umd ->
     strokeWidth = 0
     id = rand()
 
-    circles = () ->
-      g = @append "defs"
+    circles = (sel) ->
+      g = sel.append "defs"
           .append "pattern"
-          .attr
-            id: id
-            patternUnits: "userSpaceOnUse"
-            width: size
-            height: size
+          .attr "id", id
+          .attr "patternUnits", "userSpaceOnUse"
+          .attr "width", size
+          .attr "height", size
       if background
         g.append "rect"
-          .attr
-            width: size
-            height: size
-            fill: background
+          .attr "width", size
+          .attr "height", size
+          .attr "fill", background
       g.append "circle"
-        .attr
-          cx: size / 2
-          cy: size / 2
-          r: radius
-          fill: fill
-          stroke: stroke
-          "stroke-width": strokeWidth
+        .attr "cx", size / 2
+        .attr "cy", size / 2
+        .attr "r", radius
+        .attr "fill", fill
+        .attr "stroke", stroke
+        .attr "stroke-width", strokeWidth
       if complement
         for corner in [ [ 0, 0 ], [ 0, size ], [ size, 0 ], [ size, size ] ]
           g.append "circle"
-            .attr
-              cx: corner[0]
-              cy: corner[1]
-              r: radius
-              fill: fill
-              stroke: stroke
-              "stroke-width": strokeWidth
+            .attr "cx", corner[0]
+            .attr "cy", corner[1]
+            .attr "r", radius
+            .attr "fill", fill
+            .attr "stroke", stroke
+            .attr "stroke-width", strokeWidth
 
     circles.heavier = (_) ->
       if not arguments.length
@@ -176,28 +172,25 @@ umd ->
         else do (s=size) ->
           "M #{s/2}, 0 l 0, #{s}"
 
-    lines = () ->
-      g = @append "defs"
+    lines = (sel) ->
+      g = sel.append "defs"
           .append "pattern"
-          .attr
-            id: id
-            patternUnits: "userSpaceOnUse"
-            width: size
-            height: size
+          .attr "id", id
+          .attr "patternUnits", "userSpaceOnUse"
+          .attr "width", size
+          .attr "height", size
       if background
         g.append "rect"
-          .attr
-            width: size
-            height: size
-            fill: background
+          .attr "width", size
+          .attr "height", size
+          .attr "fill", background
       for o in orientation
         g.append "path"
-          .attr
-            d: path o
-            "stroke-width": strokeWidth
-            "shape-rendering": shapeRendering
-            stroke: stroke
-            "stroke-linecap": "square"
+          .attr "d", path o
+          .attr "stroke-width", strokeWidth
+          .attr "shape-rendering", shapeRendering
+          .attr "stroke", stroke
+          .attr "stroke-linecap", "square"
 
     lines.background = (_) ->
       background = _
@@ -312,30 +305,27 @@ umd ->
              l #{s/2},0 M #{(3*s)},#{s*Math.sqrt(3)/2} l #{(-s/2)},0"""
         else _ size
 
-    paths = () ->
+    paths = (sel) ->
       path = svgPath d
       id = rand()
-      g = @append "defs"
+      g = sel.append "defs"
         .append "pattern"
-        .attr
-          id: id
-          patternUnits: "userSpaceOnUse"
-          width: size * width
-          height: size * height
+        .attr "id", id
+        .attr "patternUnits", "userSpaceOnUse"
+        .attr "width", size * width
+        .attr "height", size * height
       if background
         g.append "rect"
-          .attr
-            width: size * width
-            height: size * height
-            fill: background
+          .attr "width", size * width
+          .attr "height", size * height
+          .attr "fill", background
       g.append "path"
-        .attr
-          d: path
-          fill: fill
-          "stroke-width": strokeWidth
-          "shape-rendering": shapeRendering
-          stroke: stroke
-          "stroke-linecap": "square"
+        .attr "d", path
+        .attr "fill", fill
+        .attr "stroke-width", strokeWidth
+        .attr "shape-rendering", shapeRendering
+        .attr "stroke", stroke
+        .attr "stroke-linecap", "square"
 
     paths.background = (_) ->
       background = _
