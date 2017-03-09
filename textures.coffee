@@ -269,7 +269,7 @@ umd ->
     d = ""
     shapeRendering = "auto"
     fill = "transparent"
-    id = undefined
+    id = rand()
 
     # Contributions with custom paths are welcome,
     # for example have a look at the "hexagons" path below
@@ -307,7 +307,6 @@ umd ->
 
     paths = (sel) ->
       path = svgPath d
-      id = rand()
       g = sel.append "defs"
         .append "pattern"
         .attr "id", id
