@@ -11,7 +11,11 @@
     "svg",
     "dataviz"
   ],
-  "author": "riccardo scalco",
+  "author": {
+    "name" : "Riccardo Scalco",
+    "email" : "riccardoscalco@gmail.com",
+    "url" : "http://riccardoscalco.github.io/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/riccardoscalco/textures/issues"
