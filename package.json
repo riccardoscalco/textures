@@ -16,13 +16,17 @@
     "data visualisation"
   ],
   "author": {
-    "name" : "Riccardo Scalco",
-    "email" : "riccardoscalco@gmail.com",
-    "url" : "http://riccardoscalco.github.io/"
+    "name": "Riccardo Scalco",
+    "email": "riccardoscalco@gmail.com",
+    "url": "http://riccardoscalco.github.io/"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/riccardoscalco/textures/issues"
   },
-  "homepage": "https://github.com/riccardoscalco/textures"
+  "homepage": "https://github.com/riccardoscalco/textures",
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^0.50.0"
+  }
 }
