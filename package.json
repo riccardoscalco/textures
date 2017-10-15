@@ -7,9 +7,13 @@
     "url": "https://github.com/riccardoscalco/textures.git"
   },
   "keywords": [
+    "svg pattern",
+    "patterns",
+    "textures",
     "d3",
     "svg",
-    "dataviz"
+    "dataviz",
+    "data visualisation"
   ],
   "author": {
     "name" : "Riccardo Scalco",
