@@ -20,6 +20,9 @@
     "email": "riccardoscalco@gmail.com",
     "url": "http://riccardoscalco.github.io/"
   },
+  "main": "dist/textures.cjs.js",
+  "module": "dist/textures.esm.js",
+  "browser": "dist/textures.umd.js",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/riccardoscalco/textures/issues"
@@ -27,6 +30,17 @@
   "homepage": "https://github.com/riccardoscalco/textures",
   "dependencies": {},
   "devDependencies": {
-    "rollup": "^0.50.0"
-  }
+    "rollup": "^0.50.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "dist"
+  ]
 }
