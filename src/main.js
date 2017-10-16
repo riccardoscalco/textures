@@ -1,1 +1,5 @@
-export default () => 42;
+import circles from './circles';
+
+export default {
+	circles
+};
