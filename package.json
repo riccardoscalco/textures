@@ -30,15 +30,17 @@
   "homepage": "https://github.com/riccardoscalco/textures",
   "dependencies": {},
   "devDependencies": {
+    "d3-selection": "^1.1.0",
+    "faucet": "^0.0.1",
+    "jsdom": "^11.3.0",
     "rollup": "^0.50.0",
-    "rollup-plugin-commonjs": "^8.2.1",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "tape": "^4.8.0"
   },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "node test/test.js",
-    "pretest": "npm run build"
+    "test": "tape tests/**/*.js | faucet",
+    "pretest": "rollup -c"
   },
   "files": [
     "dist"

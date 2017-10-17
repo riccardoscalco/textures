@@ -11,7 +11,7 @@ export default () => {
 	let id = rand();
 
 	const $ = selection => {
-		const group = sel
+		const group = selection
 			.append('defs')
 			.append('pattern')
 				.attr('id', id)
