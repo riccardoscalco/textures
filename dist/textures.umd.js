@@ -27,8 +27,8 @@ var circles = () => {
 				.attr('patternUnits', 'userSpaceOnUse')
 				.attr('width', size)
 				.attr('height', size);
-		
-		if (Boolean(background)) {
+
+		if (background) {
 			group
 				.append('rect')
 					.attr('width', size)
@@ -61,30 +61,38 @@ var circles = () => {
 	};
 
 	$.heavier = function (_) {
-		arguments.length ?
-			radius *= 2 * _ :
+		if (arguments.length === 0) {
 			radius *= 2;
+		} else {
+			radius *= 2 * _;
+		}
 		return $;
 	};
 
 	$.lighter = function (_) {
-		arguments.length ?
-			radius /= 2 * _ :
+		if (arguments.length === 0) {
 			radius /= 2;
+		} else {
+			radius /= 2 * _;
+		}
 		return $;
 	};
 
 	$.thinner = function (_) {
-		arguments.length ?
-			size *= 2 * _ :
+		if (arguments.length === 0) {
 			size *= 2;
+		} else {
+			size *= 2 * _;
+		}
 		return $;
 	};
 
 	$.thicker = function (_) {
-		arguments.length ?
-			size /= 2 * _ :
+		if (arguments.length === 0) {
 			size /= 2;
+		} else {
+			size /= 2 * _;
+		}
 		return $;
 	};
 
@@ -99,9 +107,11 @@ var circles = () => {
 	};
 
 	$.complement = function (_) {
-		arguments.length ?
-			complement = _ :
+		if (arguments.length === 0) {
 			complement = true;
+		} else {
+			complement = _;
+		}
 		return $;
 	};
 
@@ -126,7 +136,7 @@ var circles = () => {
 	};
 
 	$.id = function (_) {
-		if (arguments.length) {
+		if (arguments.length !== 0) {
 			id = _;
 		}
 		return $;

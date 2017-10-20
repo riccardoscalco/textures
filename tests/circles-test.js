@@ -1,7 +1,7 @@
 const tape = require('tape');
 const d3 = require('d3-selection');
-const jsdom = require('./jsdom');
 const textures = require('../dist/textures.cjs');
+const jsdom = require('./jsdom');
 
 const template = () => {
 	const texture = textures.circles();
@@ -62,7 +62,7 @@ tape(
 );
 
 tape(
-	"texture.background('firebrick') append a node <rect> with attribute fill equal to 'firebrick'",
+	'texture.background("firebrick") append a node <rect> with attribute fill equal to "firebrick"',
 	t => {
 		const {svg, texture} = template();
 		texture.background('firebrick');

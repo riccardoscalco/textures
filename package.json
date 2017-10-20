@@ -34,12 +34,13 @@
     "faucet": "^0.0.1",
     "jsdom": "^11.3.0",
     "rollup": "^0.50.0",
-    "tape": "^4.8.0"
+    "tape": "^4.8.0",
+    "xo": "^0.18.2"
   },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "tape tests/**/*.js | faucet",
+    "test": "xo src/**/*.js && xo tests/**/*.js && tape tests/**/*.js | faucet",
     "pretest": "rollup -c"
   },
   "files": [
