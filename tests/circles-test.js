@@ -62,17 +62,6 @@ tape(
 );
 
 tape(
-	'texture.background("firebrick") append a node <rect> with attribute fill equal to "firebrick"',
-	t => {
-		const {svg, texture} = template();
-		texture.background('firebrick');
-		svg.call(texture);
-		t.equal(svg.select('defs').select('pattern').select('rect').attr('fill'), 'firebrick');
-		t.end();
-	}
-);
-
-tape(
 	'texture.circles() append a node <circle> with some default attributes',
 	t => {
 		const {svg, texture} = template();
@@ -84,17 +73,6 @@ tape(
 		t.equal(circle.attr('r'), '2');
 		t.equal(circle.attr('cx'), '10');
 		t.equal(circle.attr('cy'), '10');
-		t.end();
-	}
-);
-
-tape(
-	'texture.complement() append 4 more nodes <circles>',
-	t => {
-		const {svg, texture} = template();
-		texture.complement();
-		svg.call(texture);
-		t.equal(svg.select('defs').select('pattern').selectAll('circle').size(), 5);
 		t.end();
 	}
 );
@@ -183,6 +161,124 @@ tape(
 		texture.thicker(2);
 		svg.call(texture);
 		t.equal(svg.select('defs').select('pattern').attr('width'), '5');
+		t.end();
+	}
+);
+
+tape(
+	'texture.background("firebrick") append a node <rect> with attribute fill equal to "firebrick"',
+	t => {
+		const {svg, texture} = template();
+		texture.background('firebrick');
+		svg.call(texture);
+		t.equal(svg.select('defs').select('pattern').select('rect').attr('fill'), 'firebrick');
+		t.end();
+	}
+);
+
+tape(
+	'texture.size(40) set size to 40',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40);
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('cx'), '20');
+		t.equal(circle.attr('cy'), '20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.complement() append 4 more nodes <circles>',
+	t => {
+		const {svg, texture} = template();
+		texture.complement();
+		svg.call(texture);
+		t.equal(svg.select('defs').select('pattern').selectAll('circle').size(), 5);
+		t.end();
+	}
+);
+
+tape(
+	'texture.radius(5) set radius to 5',
+	t => {
+		const {svg, texture} = template();
+		texture.radius(5);
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('r'), '5');
+		t.end();
+	}
+);
+
+tape(
+	'texture.fill("red") set fill to red',
+	t => {
+		const {svg, texture} = template();
+		texture.fill('red');
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('fill'), 'red');
+		t.end();
+	}
+);
+
+tape(
+	'texture.stroke("red") set stroke to red',
+	t => {
+		const {svg, texture} = template();
+		texture.stroke('red');
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('stroke'), 'red');
+		t.end();
+	}
+);
+
+tape(
+	'texture.strokeWidth(2) set stroke-width to 2',
+	t => {
+		const {svg, texture} = template();
+		texture.strokeWidth(2);
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('stroke-width'), '2');
+		t.end();
+	}
+);
+
+tape(
+	'texture.id("xyz") set pattern id to xyz',
+	t => {
+		const {svg, texture} = template();
+		texture.id('xyz');
+		svg.call(texture);
+		t.equal(svg.select('defs').select('pattern').attr('id'), 'xyz');
+		t.end();
+	}
+);
+
+tape(
+	'texture.url() returns a string with the pattern id',
+	t => {
+		const {svg, texture} = template();
+		texture.id('xyz');
+		svg.call(texture);
+		t.equal(texture.url(), 'url(#xyz)');
+		t.end();
+	}
+);
+
+tape(
+	'texture.size(30).radius(5) set size to 30 and radius to 5',
+	t => {
+		const {svg, texture} = template();
+		texture.size(30).radius(5);
+		svg.call(texture);
+		const circle = svg.select('defs').select('pattern').select('circle');
+		t.equal(circle.attr('r'), '5');
+		t.equal(circle.attr('cx'), '15');
 		t.end();
 	}
 );
