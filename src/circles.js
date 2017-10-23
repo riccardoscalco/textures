@@ -127,9 +127,10 @@ export default () => {
 	};
 
 	$.id = function (_) {
-		if (arguments.length !== 0) {
-			id = _;
+		if (arguments.length === 0) {
+			return id;
 		}
+		id = _;
 		return $;
 	};
 
