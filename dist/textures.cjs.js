@@ -148,8 +148,8 @@ var circles = () => {
 
 var lines = () => {
 	let size = 20;
-	let stroke = '$343434';
-	let strokeWidth = 0;
+	let stroke = '#343434';
+	let strokeWidth = 2;
 	let background = '';
 	let id = rand();
 	let orientation = ['diagonal'];
@@ -199,15 +199,16 @@ var lines = () => {
 					.attr('fill', background);
 		}
 
-		orientation.forEach(o => {
-			group
-				.append('path')
-					.attr('d', path(o))
-					.attr('stroke-width', strokeWidth)
-					.attr('shape-rendering', shapeRendering)
-					.attr('stroke', stroke)
-					.attr('stroke-linecap', 'square');
-		});
+		orientation
+			.forEach(o => {
+				group
+					.append('path')
+						.attr('d', path(o))
+						.attr('stroke-width', strokeWidth)
+						.attr('shape-rendering', shapeRendering)
+						.attr('stroke', stroke)
+						.attr('stroke-linecap', 'square');
+			});
 	};
 
 	$.heavier = function (_) {
@@ -272,7 +273,7 @@ var lines = () => {
 	};
 
 	$.id = function (_) {
-		if (arguments.length !== 0) {
+		if (arguments.length === 0) {
 			return id;
 		}
 		id = _;
