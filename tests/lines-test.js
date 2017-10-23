@@ -245,3 +245,170 @@ tape(
 		t.end();
 	}
 );
+
+tape(
+	'texture.orientation("vertical") set orientation to vertical',
+	t => {
+		const {svg, texture} = template();
+		texture.orientation('vertical');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 10, 0 l 0, 20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("0/8") set orientation to 0/8',
+	t => {
+		const {svg, texture} = template();
+		texture.orientation('0/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 10, 0 l 0, 20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("1/8") set orientation to 1/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('1/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 10,0 l 20,40 M -10,0 l 20,40 M 30,0 l 20,40');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("2/8") set orientation to 2/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(80).orientation('2/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,80 l 80,-80 M -20,20 l 40,-40 M 60,100 l 40,-40');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("diagonal") set orientation to diagonal',
+	t => {
+		const {svg, texture} = template();
+		texture.size(80).orientation('diagonal');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,80 l 80,-80 M -20,20 l 40,-40 M 60,100 l 40,-40');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("3/8") set orientation to 3/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('3/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,30 l 40,-20 M 0,10 l 40,-20 M 0,50 l 40,-20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("4/8") set orientation to 4/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('4/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,20 l 40,0');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("horizontal") set orientation to horizontal',
+	t => {
+		const {svg, texture} = template();
+		texture.size(20).orientation('horizontal');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,10 l 20,0');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("5/8") set orientation to 5/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('5/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,-10 l 40,20M 0,10 l 40,20 M 0,30 l 40,20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("6/8") set orientation to 6/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('6/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,0 l 40,40 M -10,30 l 20,20 M 30,-10 l 20,20');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("7/8") set orientation to 7/8',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('7/8');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M -10,0 l 20,40 M 10,0 l 20,40 M 30,0 l 20,40');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("xxx") defaults to vertical',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('xxx');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 20, 0 l 0, 40');
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation("3/8", "7/8") add a couple of nodes <path>',
+	t => {
+		const {svg, texture} = template();
+		texture.size(40).orientation('3/8', '7/8');
+		svg.call(texture);
+		t.equal(svg.select('defs').select('pattern').selectAll('path').size(), 2);
+		t.end();
+	}
+);
+
+tape(
+	'texture.orientation() defaults to diagonal',
+	t => {
+		const {svg, texture} = template();
+		texture.size(80).orientation();
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('d'), 'M 0,80 l 80,-80 M -20,20 l 40,-40 M 60,100 l 40,-40');
+		t.end();
+	}
+);

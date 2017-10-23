@@ -256,6 +256,9 @@ var lines = () => {
 	};
 
 	$.orientation = function (...args) {
+		if (arguments.length === 0) {
+			return $;
+		}
 		orientation = args;
 		return $;
 	};
