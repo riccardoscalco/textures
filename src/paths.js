@@ -7,7 +7,7 @@ export default () => {
 	let stroke = '#343434';
 	let strokeWidth = 2;
 	let background = '';
-	let d = '';
+	let d = s => `M ${s / 4},${s * 3 / 4}l${s / 4},${-s / 2}l${s / 4},${s / 2}`;
 	let id = rand();
 	let fill = 'transparent';
 	let shapeRendering = 'auto';
@@ -37,13 +37,14 @@ export default () => {
 	};
 
 	const $ = selection => {
+		const p = path(d);
 		const group = selection
-		.append('defs')
-		.append('pattern')
-			.attr('id', id)
-			.attr('patternUnits', 'userSpaceOnUse')
-			.attr('width', size * width)
-			.attr('height', size * height);
+			.append('defs')
+			.append('pattern')
+				.attr('id', id)
+				.attr('patternUnits', 'userSpaceOnUse')
+				.attr('width', size * width)
+				.attr('height', size * height);
 
 		if (background) {
 			group
@@ -55,7 +56,7 @@ export default () => {
 
 		group
 			.append('path')
-				.attr('d', path(d))
+				.attr('d', p)
 				.attr('fill', fill)
 				.attr('stroke', stroke)
 				.attr('stroke-width', strokeWidth)
