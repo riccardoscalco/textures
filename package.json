@@ -13,7 +13,9 @@
     "d3",
     "svg",
     "dataviz",
-    "data visualisation"
+    "data visualisation",
+    "maps",
+    "visual"
   ],
   "author": {
     "name": "Riccardo Scalco",
@@ -22,7 +24,7 @@
   },
   "main": "dist/textures.cjs.js",
   "module": "dist/textures.esm.js",
-  "browser": "dist/textures.umd.js",
+  "browser": "dist/textures.js",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/riccardoscalco/textures/issues"
@@ -34,7 +36,9 @@
     "faucet": "^0.0.1",
     "jsdom": "^11.3.0",
     "rollup": "^0.50.0",
+    "rollup-plugin-uglify": "^2.0.1",
     "tape": "^4.8.0",
+    "uglify-es": "^3.1.5",
     "xo": "^0.18.2"
   },
   "scripts": {
