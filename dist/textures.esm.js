@@ -151,7 +151,7 @@ var lines = () => {
 	let background = '';
 	let id = rand();
 	let orientation = ['diagonal'];
-	const shapeRendering = 'auto';
+	let shapeRendering = 'auto';
 
 	const path = orientation => {
 		const s = size;
@@ -260,6 +260,11 @@ var lines = () => {
 			return $;
 		}
 		orientation = args;
+		return $;
+	};
+
+	$.shapeRendering = function (_) {
+		shapeRendering = _;
 		return $;
 	};
 

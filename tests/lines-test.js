@@ -188,6 +188,18 @@ tape(
 );
 
 tape(
+	'texture.shapeRendering("crispEdges") set shape-rendering to crispEdges',
+	t => {
+		const {svg, texture} = template();
+		texture.shapeRendering('crispEdges');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('shape-rendering'), 'crispEdges');
+		t.end();
+	}
+);
+
+tape(
 	'texture.stroke("red") set stroke to red',
 	t => {
 		const {svg, texture} = template();
