@@ -1,0 +1,60 @@
+{
+  "name": "textures.js-website",
+  "version": "1.0.0",
+  "description": "Web page served at http://riccardoscalco.github.io/textures/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riccardoscalco/textures.git"
+  },
+  "keywords": [
+    "svg pattern",
+    "patterns",
+    "textures",
+    "d3",
+    "svg",
+    "dataviz",
+    "data visualisation",
+    "maps",
+    "visual"
+  ],
+  "author": {
+    "name": "Riccardo Scalco",
+    "email": "riccardoscalco@gmail.com",
+    "url": "http://riccardoscalco.github.io/"
+  },
+  "browser": "bundle.js",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riccardoscalco/textures/issues"
+  },
+  "homepage": "https://github.com/riccardoscalco/textures",
+  "devDependencies": {
+    "d3-selection": "^1.1.0",
+    "live-server": "^1.2.0",
+    "rollup": "^0.50.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "uglify-es": "^3.1.5",
+    "xo": "^0.18.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "live": "live-server",
+    "test": "xo"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "d3-transition": "^1.1.0"
+  },
+  "xo": {
+    "envs": [
+      "browser",
+      "node"
+    ],
+    "ignores": ["lib/*"],
+    "rules": {}
+  }
+}
