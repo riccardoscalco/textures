@@ -35,7 +35,6 @@
     "d3-selection": "^1.1.0",
     "faucet": "^0.0.1",
     "jsdom": "^11.3.0",
-    "np": "^2.16.0",
     "rollup": "^0.50.0",
     "rollup-plugin-uglify": "^2.0.1",
     "tape": "^4.8.0",
