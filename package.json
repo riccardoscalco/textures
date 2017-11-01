@@ -47,14 +47,17 @@
     "dist"
   ],
   "dependencies": {
-    "d3-transition": "^1.1.0"
+    "d3-transition": "^1.1.0",
+    "textures": "^1.2.0"
   },
   "xo": {
     "envs": [
       "browser",
       "node"
     ],
-    "ignores": ["lib/*"],
+    "ignores": [
+      "lib/*"
+    ],
     "rules": {}
   }
 }

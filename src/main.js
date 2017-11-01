@@ -1,6 +1,6 @@
 import {select} from 'd3-selection';
 import 'd3-transition';
-import textures from '../lib/textures.esm';
+import textures from 'textures';
 
 const drawExampleTexture = () => {
 	const w = 150;
