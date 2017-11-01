@@ -6,14 +6,11 @@ export default [
 	{
 		input: 'src/main.js',
 		plugins: [uglify({}, minify)],
-		output: {file: pkg.browser, format: 'umd'},
+		output: {file: pkg.main, format: 'umd'},
 		name: 'textures'
 	},
 	{
 		input: 'src/main.js',
-		output: [
-			{file: pkg.main, format: 'cjs'},
-			{file: pkg.module, format: 'es'}
-		]
+		output: {file: pkg.module, format: 'es'}
 	}
 ];
