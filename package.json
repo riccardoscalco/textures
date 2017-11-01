@@ -22,7 +22,7 @@
     "email": "riccardoscalco@gmail.com",
     "url": "http://riccardoscalco.github.io/"
   },
-  "main": "dist/textures.umd.js",
+  "main": "dist/textures.js",
   "module": "dist/textures.esm.js",
   "license": "MIT",
   "bugs": {

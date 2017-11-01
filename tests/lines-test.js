@@ -1,6 +1,6 @@
 const tape = require('tape');
 const d3 = require('d3-selection');
-const textures = require('../dist/textures.cjs');
+const textures = require('../dist/textures');
 const jsdom = require('./jsdom');
 
 const template = () => {
