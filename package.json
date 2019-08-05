@@ -31,17 +31,19 @@
   "homepage": "https://github.com/riccardoscalco/textures",
   "dependencies": {},
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "d3-selection": "^1.1.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "d3-selection": "^1.4.0",
     "faucet": "^0.0.1",
-    "jsdom": "^11.3.0",
+    "jsdom": "^15.1.1",
     "np": "^5.0.3",
-    "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-uglify": "^2.0.1",
+    "rollup": "^1.18.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-uglify": "^6.0.2",
     "tape": "^4.8.0",
-    "xo": "^0.18.2"
+    "xo": "^0.24.0"
   },
   "scripts": {
     "build": "rollup -c",

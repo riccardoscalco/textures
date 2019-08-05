@@ -14,39 +14,39 @@ export default () => {
 		const group = selection
 			.append('defs')
 			.append('pattern')
-				.attr('id', id)
-				.attr('patternUnits', 'userSpaceOnUse')
-				.attr('width', size)
-				.attr('height', size);
+			.attr('id', id)
+			.attr('patternUnits', 'userSpaceOnUse')
+			.attr('width', size)
+			.attr('height', size);
 
 		if (background) {
 			group
 				.append('rect')
-					.attr('width', size)
-					.attr('height', size)
-					.attr('fill', background);
+				.attr('width', size)
+				.attr('height', size)
+				.attr('fill', background);
 		}
 
 		group
 			.append('circle')
-				.attr('cx', size / 2)
-				.attr('cy', size / 2)
-				.attr('r', radius)
-				.attr('fill', fill)
-				.attr('stroke', stroke)
-				.attr('stroke-width', strokeWidth);
+			.attr('cx', size / 2)
+			.attr('cy', size / 2)
+			.attr('r', radius)
+			.attr('fill', fill)
+			.attr('stroke', stroke)
+			.attr('stroke-width', strokeWidth);
 
 		if (complement) {
 			[[0, 0], [0, size], [size, 0], [size, size]]
 				.forEach(corner => {
 					group
 						.append('circle')
-							.attr('cx', corner[0])
-							.attr('cy', corner[1])
-							.attr('r', radius)
-							.attr('fill', fill)
-							.attr('stroke', stroke)
-							.attr('stroke-width', strokeWidth);
+						.attr('cx', corner[0])
+						.attr('cy', corner[1])
+						.attr('r', radius)
+						.attr('fill', fill)
+						.attr('stroke', stroke)
+						.attr('stroke-width', strokeWidth);
 				});
 		}
 	};
@@ -57,6 +57,7 @@ export default () => {
 		} else {
 			radius *= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -66,6 +67,7 @@ export default () => {
 		} else {
 			radius /= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -75,6 +77,7 @@ export default () => {
 		} else {
 			size *= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -84,6 +87,7 @@ export default () => {
 		} else {
 			size /= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -103,6 +107,7 @@ export default () => {
 		} else {
 			complement = _;
 		}
+
 		return $;
 	};
 
@@ -130,6 +135,7 @@ export default () => {
 		if (arguments.length === 0) {
 			return id;
 		}
+
 		id = _;
 		return $;
 	};

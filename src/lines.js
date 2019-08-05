@@ -40,28 +40,28 @@ export default () => {
 		const group = selection
 			.append('defs')
 			.append('pattern')
-				.attr('id', id)
-				.attr('patternUnits', 'userSpaceOnUse')
-				.attr('width', size)
-				.attr('height', size);
+			.attr('id', id)
+			.attr('patternUnits', 'userSpaceOnUse')
+			.attr('width', size)
+			.attr('height', size);
 
 		if (background) {
 			group
 				.append('rect')
-					.attr('width', size)
-					.attr('height', size)
-					.attr('fill', background);
+				.attr('width', size)
+				.attr('height', size)
+				.attr('fill', background);
 		}
 
 		orientation
 			.forEach(o => {
 				group
 					.append('path')
-						.attr('d', path(o))
-						.attr('stroke-width', strokeWidth)
-						.attr('shape-rendering', shapeRendering)
-						.attr('stroke', stroke)
-						.attr('stroke-linecap', 'square');
+					.attr('d', path(o))
+					.attr('stroke-width', strokeWidth)
+					.attr('shape-rendering', shapeRendering)
+					.attr('stroke', stroke)
+					.attr('stroke-linecap', 'square');
 			});
 	};
 
@@ -71,6 +71,7 @@ export default () => {
 		} else {
 			strokeWidth *= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -80,6 +81,7 @@ export default () => {
 		} else {
 			strokeWidth /= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -89,6 +91,7 @@ export default () => {
 		} else {
 			size *= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -98,6 +101,7 @@ export default () => {
 		} else {
 			size /= 2 * _;
 		}
+
 		return $;
 	};
 
@@ -115,6 +119,7 @@ export default () => {
 		if (arguments.length === 0) {
 			return $;
 		}
+
 		orientation = args;
 		return $;
 	};
@@ -138,6 +143,7 @@ export default () => {
 		if (arguments.length === 0) {
 			return id;
 		}
+
 		id = _;
 		return $;
 	};
