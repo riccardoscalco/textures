@@ -1,9 +1,11 @@
 os:
  - linux
- - windows
 language: node_js
-node_js:
- - '12'
- - '10'
- - '8'
+node_js: stable
+
+notifications:
+ - email: false
+
+script:
+ - npm run test
 
