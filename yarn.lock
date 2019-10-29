@@ -738,7 +738,7 @@ acorn@^6.0.1, acorn@^6.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.2.1.tgz#3ed8422d6dec09e6121cc7a843ca86a330a86b51"
   integrity sha512-JD0xT5FCRDNyjDda3Lrg/IxFscp9q4tiYtxE1/nOzlKCk7hIRuYjhq1kCNkbPjMRMZuFq20HNQn1I9k8Oj0E+Q==
 
-acorn@^7.1.0:
+acorn@^7.0.0, acorn@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.0.tgz#949d36f2c292535da602283586c2477c57eb2d6c"
   integrity sha512-kL5CuoXA/dgxlBbVrflsflzQ3PAas7RYZB52NOm/6839iVYJgKMJ3cQJD+t2i5+qFa8h3MDpEOJiS64E8JLnSQ==
@@ -3723,9 +3723,9 @@ normalize-url@^4.1.0:
   integrity sha512-0NLtR71o4k6GLP+mr6Ty34c5GA6CMoEsncKJxvQd8NzPxaHRJNnb5gZE8R1XF4CPIS7QPHLJ74IFszwtNVAHVQ==
 
 np@^5.0.3:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/np/-/np-5.1.1.tgz#85c999b6a2b969768b4fa062e2ceda9f1fbae2d1"
-  integrity sha512-P0lZvAhcbLkSczR8YewU5uasyZSemVR6mRbxHH+vkLXvG3BNBm5bQFH7fA0KD0apUKEMRoH5Cy0B7d0LpwOPKg==
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/np/-/np-5.1.2.tgz#0339e9a28c6996f8dbc1fbf971b3f9aa9eb7bfea"
+  integrity sha512-r+Gh5MRzkw38ulD8+VhpfAjJUiFJTKJv9a2NVPFelXm1jQcugSHs+IntqlAA/ydwgxwNe+EDnyvGjtZuFyeVFg==
   dependencies:
     "@samverschueren/stream-to-observable" "^0.3.0"
     any-observable "^0.4.0"
