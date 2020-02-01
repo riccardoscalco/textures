@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.5.5",
     "d3-selection": "^1.4.0",
     "faucet": "^0.0.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.0.1",
     "np": "^5.0.3",
     "rollup": "^1.18.0",
     "rollup-plugin-babel": "^4.3.3",
