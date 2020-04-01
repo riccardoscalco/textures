@@ -43,7 +43,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.2",
     "tape": "^4.8.0",
-    "xo": "^0.25.3"
+    "xo": "^0.28.1"
   },
   "scripts": {
     "build": "rollup -c",
