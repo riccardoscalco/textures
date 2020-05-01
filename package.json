@@ -42,7 +42,7 @@
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.2",
-    "tape": "^4.8.0",
+    "tape": "^5.0.0",
     "xo": "^0.25.3"
   },
   "scripts": {
