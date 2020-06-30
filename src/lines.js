@@ -16,7 +16,7 @@ export default () => {
 			case 'vertical':
 				return `M ${s / 2}, 0 l 0, ${s}`;
 			case '1/8':
-				return `M ${s / 4},0 l ${s / 2},${s} M ${-s / 4},0 l ${s / 2},${s} M ${s * 3 / 4},0 l ${s / 2},${s}`;
+				return `M ${-s / 4},${s} l ${s / 2},${-s} M ${s / 4},${s} l ${s / 2},${-s} M ${s * 3 / 4},${s} l ${s / 2},${-s}`,
 			case '2/8':
 			case 'diagonal':
 				return `M 0,${s} l ${s},${-s} M ${-s / 4},${s / 4} l ${s / 2},${-s / 2} M ${3 / 4 * s},${5 / 4 * s} l ${s / 2},${-s / 2}`;
