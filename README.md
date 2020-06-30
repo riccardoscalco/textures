@@ -20,7 +20,7 @@ Import `textures.js` from NPM with:
 import textures from 'textures';
 ```
 
-You can also use`textures.js` in your html page with a `<script>` tag, dowloading `textures.js` in a local folder
+You can also use`textures.js` in your html page with a `<script>` tag, downloading `textures.js` in a local folder
 
 ```
 <script src="path/to/textures.js"></script>
