@@ -33,7 +33,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "d3-selection": "^1.4.0",
+    "d3-selection": "^2.0.0",
     "faucet": "^0.0.1",
     "jsdom": "^16.2.2",
     "np": "^6.3.1",
