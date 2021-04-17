@@ -289,7 +289,7 @@ tape(
 		texture.size(40).orientation('1/8');
 		svg.call(texture);
 		const path = svg.select('defs').select('pattern').select('path');
-		t.equal(path.attr('d'), 'M 10,0 l 20,40 M -10,0 l 20,40 M 30,0 l 20,40');
+		t.equal(path.attr('d'), 'M -10,40 l 20,-40 M 10,40 l 20,-40 M 30,40 l 20,-40');
 		t.end();
 	}
 );
