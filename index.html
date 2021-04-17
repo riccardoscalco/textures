@@ -43,7 +43,8 @@ var t = textures.lines()
 svg.call(t);
 
 svg.append("circle")
-	.style("fill", t.url());</code></pre>
+  .attr("r", radius)
+  .style("fill", t.url());</code></pre>
 		</section>
 
 		<section class="lines">
@@ -312,8 +313,5 @@ svg.append("circle")
 			<span>--- MIT License ---</span>
 		</footer>
 	</body>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
-	<script src="js/textures.min.js" charset="utf-8"></script>
 	<script src="bundle.js" charset="utf-8"></script>
 </html>

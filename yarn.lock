@@ -2660,9 +2660,10 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-textures@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/textures/-/textures-1.2.0.tgz#8240cae9a50a8568f58afd302b263a52ef459974"
+textures@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/textures/-/textures-1.2.3.tgz#2e2615ab4e8f9a73008a7507dd9e5f84e9ffc48b"
+  integrity sha512-Ehg2adOcyfCR5DPOzBauXERJN4cXF1Bh4dITY2pPQ3+CvBBU0SZAep6pq5cCWp8K+k3OlXYh5dc2stgEQlqAWg==
 
 the-argv@^1.0.0:
   version "1.0.0"

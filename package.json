@@ -48,7 +48,7 @@
   ],
   "dependencies": {
     "d3-transition": "^1.1.0",
-    "textures": "^1.2.0"
+    "textures": "^1.2.3"
   },
   "xo": {
     "envs": [
