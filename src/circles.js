@@ -1,6 +1,6 @@
-import rand from './random';
+import rand from './random.js';
 
-export default () => {
+export default function circles() {
 	let size = 20;
 	let background = '';
 	let radius = 2;
@@ -37,56 +37,39 @@ export default () => {
 			.attr('stroke-width', strokeWidth);
 
 		if (complement) {
-			[[0, 0], [0, size], [size, 0], [size, size]]
-				.forEach(corner => {
-					group
-						.append('circle')
-						.attr('cx', corner[0])
-						.attr('cy', corner[1])
-						.attr('r', radius)
-						.attr('fill', fill)
-						.attr('stroke', stroke)
-						.attr('stroke-width', strokeWidth);
-				});
+			for (const corner of [[0, 0], [0, size], [size, 0], [size, size]]) {
+				group
+					.append('circle')
+					.attr('cx', corner[0])
+					.attr('cy', corner[1])
+					.attr('r', radius)
+					.attr('fill', fill)
+					.attr('stroke', stroke)
+					.attr('stroke-width', strokeWidth);
+			}
 		}
 	};
 
 	$.heavier = function (_) {
-		if (arguments.length === 0) {
-			radius *= 2;
-		} else {
-			radius *= 2 * _;
-		}
+		radius *= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.lighter = function (_) {
-		if (arguments.length === 0) {
-			radius /= 2;
-		} else {
-			radius /= 2 * _;
-		}
+		radius /= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.thinner = function (_) {
-		if (arguments.length === 0) {
-			size *= 2;
-		} else {
-			size *= 2 * _;
-		}
+		size *= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.thicker = function (_) {
-		if (arguments.length === 0) {
-			size /= 2;
-		} else {
-			size /= 2 * _;
-		}
+		size /= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
@@ -102,11 +85,7 @@ export default () => {
 	};
 
 	$.complement = function (_) {
-		if (arguments.length === 0) {
-			complement = true;
-		} else {
-			complement = _;
-		}
+		complement = arguments.length === 0 ? true : _;
 
 		return $;
 	};
@@ -145,4 +124,4 @@ export default () => {
 	};
 
 	return $;
-};
+}

@@ -1,6 +1,6 @@
-import rand from './random';
+import rand from './random.js';
 
-export default () => {
+export default function lines() {
 	let size = 20;
 	let stroke = '#343434';
 	let strokeWidth = 2;
@@ -53,54 +53,37 @@ export default () => {
 				.attr('fill', background);
 		}
 
-		orientation
-			.forEach(o => {
-				group
-					.append('path')
-					.attr('d', path(o))
-					.attr('stroke-width', strokeWidth)
-					.attr('shape-rendering', shapeRendering)
-					.attr('stroke', stroke)
-					.attr('stroke-linecap', 'square');
-			});
+		for (const o of orientation) {
+			group
+				.append('path')
+				.attr('d', path(o))
+				.attr('stroke-width', strokeWidth)
+				.attr('shape-rendering', shapeRendering)
+				.attr('stroke', stroke)
+				.attr('stroke-linecap', 'square');
+		}
 	};
 
 	$.heavier = function (_) {
-		if (arguments.length === 0) {
-			strokeWidth *= 2;
-		} else {
-			strokeWidth *= 2 * _;
-		}
+		strokeWidth *= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.lighter = function (_) {
-		if (arguments.length === 0) {
-			strokeWidth /= 2;
-		} else {
-			strokeWidth /= 2 * _;
-		}
+		strokeWidth /= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.thinner = function (_) {
-		if (arguments.length === 0) {
-			size *= 2;
-		} else {
-			size *= 2 * _;
-		}
+		size *= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
 
 	$.thicker = function (_) {
-		if (arguments.length === 0) {
-			size /= 2;
-		} else {
-			size /= 2 * _;
-		}
+		size /= arguments.length === 0 ? 2 : 2 * _;
 
 		return $;
 	};
@@ -153,4 +136,4 @@ export default () => {
 	};
 
 	return $;
-};
+}

@@ -1,8 +1,8 @@
-var rand = (function () {
+function random() {
   return "".concat(Math.random().toString(36), "00000000000000000").replace(/[^a-z]+/g, '').slice(0, 5);
-});
+}
 
-var circles = (function () {
+function circles() {
   var size = 20;
   var background = '';
   var radius = 2;
@@ -10,7 +10,7 @@ var circles = (function () {
   var fill = '#343434';
   var stroke = '#343434';
   var strokeWidth = 0;
-  var id = rand();
+  var id = random();
 
   var $ = function $(selection) {
     var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
@@ -22,49 +22,30 @@ var circles = (function () {
     group.append('circle').attr('cx', size / 2).attr('cy', size / 2).attr('r', radius).attr('fill', fill).attr('stroke', stroke).attr('stroke-width', strokeWidth);
 
     if (complement) {
-      [[0, 0], [0, size], [size, 0], [size, size]].forEach(function (corner) {
+      for (var _i = 0, _arr = [[0, 0], [0, size], [size, 0], [size, size]]; _i < _arr.length; _i++) {
+        var corner = _arr[_i];
         group.append('circle').attr('cx', corner[0]).attr('cy', corner[1]).attr('r', radius).attr('fill', fill).attr('stroke', stroke).attr('stroke-width', strokeWidth);
-      });
+      }
     }
   };
 
   $.heavier = function (_) {
-    if (arguments.length === 0) {
-      radius *= 2;
-    } else {
-      radius *= 2 * _;
-    }
-
+    radius *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.lighter = function (_) {
-    if (arguments.length === 0) {
-      radius /= 2;
-    } else {
-      radius /= 2 * _;
-    }
-
+    radius /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thinner = function (_) {
-    if (arguments.length === 0) {
-      size *= 2;
-    } else {
-      size *= 2 * _;
-    }
-
+    size *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thicker = function (_) {
-    if (arguments.length === 0) {
-      size /= 2;
-    } else {
-      size /= 2 * _;
-    }
-
+    size /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
@@ -79,12 +60,7 @@ var circles = (function () {
   };
 
   $.complement = function (_) {
-    if (arguments.length === 0) {
-      complement = true;
-    } else {
-      complement = _;
-    }
-
+    complement = arguments.length === 0 ? true : _;
     return $;
   };
 
@@ -122,14 +98,88 @@ var circles = (function () {
   };
 
   return $;
-});
+}
 
-var lines = (function () {
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function () {};
+
+      return {
+        s: F,
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function (e) {
+          throw e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function () {
+      it = o[Symbol.iterator]();
+    },
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function (e) {
+      didErr = true;
+      err = e;
+    },
+    f: function () {
+      try {
+        if (!normalCompletion && it.return != null) it.return();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
+function lines() {
   var size = 20;
   var stroke = '#343434';
   var strokeWidth = 2;
   var background = '';
-  var id = rand();
+  var id = random();
   var orientation = ['diagonal'];
   var shapeRendering = 'auto';
 
@@ -142,7 +192,7 @@ var lines = (function () {
         return "M ".concat(s / 2, ", 0 l 0, ").concat(s);
 
       case '1/8':
-        return "M ".concat(s / 4, ",0 l ").concat(s / 2, ",").concat(s, " M ").concat(-s / 4, ",0 l ").concat(s / 2, ",").concat(s, " M ").concat(s * 3 / 4, ",0 l ").concat(s / 2, ",").concat(s);
+        return "M ".concat(-s / 4, ",").concat(s, " l ").concat(s / 2, ",").concat(-s, " M ").concat(s / 4, ",").concat(s, " l ").concat(s / 2, ",").concat(-s, " M ").concat(s * 3 / 4, ",").concat(s, " l ").concat(s / 2, ",").concat(-s);
 
       case '2/8':
       case 'diagonal':
@@ -176,48 +226,38 @@ var lines = (function () {
       group.append('rect').attr('width', size).attr('height', size).attr('fill', background);
     }
 
-    orientation.forEach(function (o) {
-      group.append('path').attr('d', path(o)).attr('stroke-width', strokeWidth).attr('shape-rendering', shapeRendering).attr('stroke', stroke).attr('stroke-linecap', 'square');
-    });
+    var _iterator = _createForOfIteratorHelper(orientation),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var o = _step.value;
+        group.append('path').attr('d', path(o)).attr('stroke-width', strokeWidth).attr('shape-rendering', shapeRendering).attr('stroke', stroke).attr('stroke-linecap', 'square');
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
   };
 
   $.heavier = function (_) {
-    if (arguments.length === 0) {
-      strokeWidth *= 2;
-    } else {
-      strokeWidth *= 2 * _;
-    }
-
+    strokeWidth *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.lighter = function (_) {
-    if (arguments.length === 0) {
-      strokeWidth /= 2;
-    } else {
-      strokeWidth /= 2 * _;
-    }
-
+    strokeWidth /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thinner = function (_) {
-    if (arguments.length === 0) {
-      size *= 2;
-    } else {
-      size *= 2 * _;
-    }
-
+    size *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thicker = function (_) {
-    if (arguments.length === 0) {
-      size /= 2;
-    } else {
-      size /= 2 * _;
-    }
-
+    size /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
@@ -273,9 +313,9 @@ var lines = (function () {
   };
 
   return $;
-});
+}
 
-var paths = (function () {
+function paths() {
   var width = 1;
   var height = 1;
   var size = 20;
@@ -287,7 +327,7 @@ var paths = (function () {
     return "M ".concat(s / 4, ",").concat(s * 3 / 4, "l").concat(s / 4, ",").concat(-s / 2, "l").concat(s / 4, ",").concat(s / 2);
   };
 
-  var id = rand();
+  var id = random();
   var fill = 'transparent';
   var shapeRendering = 'auto';
 
@@ -335,42 +375,22 @@ var paths = (function () {
   };
 
   $.heavier = function (_) {
-    if (arguments.length === 0) {
-      strokeWidth *= 2;
-    } else {
-      strokeWidth *= 2 * _;
-    }
-
+    strokeWidth *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.lighter = function (_) {
-    if (arguments.length === 0) {
-      strokeWidth /= 2;
-    } else {
-      strokeWidth /= 2 * _;
-    }
-
+    strokeWidth /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thinner = function (_) {
-    if (arguments.length === 0) {
-      size *= 2;
-    } else {
-      size *= 2 * _;
-    }
-
+    size *= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
   $.thicker = function (_) {
-    if (arguments.length === 0) {
-      size /= 2;
-    } else {
-      size /= 2 * _;
-    }
-
+    size /= arguments.length === 0 ? 2 : 2 * _;
     return $;
   };
 
@@ -423,7 +443,9 @@ var paths = (function () {
   };
 
   return $;
-});
+}
+
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 
 var main = {
   circles: circles,
