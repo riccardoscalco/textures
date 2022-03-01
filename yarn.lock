@@ -1434,6 +1434,16 @@ array-unique@^0.3.2:
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
   integrity sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=
 
+array.prototype.every@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/array.prototype.every/-/array.prototype.every-1.1.3.tgz#31f01b48e1160bc4b49ecab246bf7f765c6686f9"
+  integrity sha512-vWnriJI//SOMOWtXbU/VXhJ/InfnNHPF6BLKn5WfY8xXy+NWql0fUy20GO3sdqBhCAO+qw8S/E5nJiZX+QFdCA==
+  dependencies:
+    call-bind "^1.0.2"
+    define-properties "^1.1.3"
+    es-abstract "^1.19.0"
+    is-string "^1.0.7"
+
 array.prototype.flat@^1.2.3:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/array.prototype.flat/-/array.prototype.flat-1.2.4.tgz#6ef638b43312bd401b4c6199fdec7e2dc9e9a123"
@@ -2571,7 +2581,7 @@ es-abstract@^1.18.0-next.2:
     string.prototype.trimend "^1.0.3"
     string.prototype.trimstart "^1.0.3"
 
-es-abstract@^1.19.1:
+es-abstract@^1.19.0, es-abstract@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.19.1.tgz#d4885796876916959de78edaa0df456627115ec3"
   integrity sha512-2vJ6tjA/UfqLm2MPs7jxVybLoB8i1t1Jd9R3kISld20sIxPcTbLuggQOUxeWeAvIUkduv/CfMjuh4WmiXr2v9w==
@@ -6793,10 +6803,11 @@ tapable@^0.1.8:
   integrity sha1-KcNXB8K3DlDQdIK10gLo7URtr9Q=
 
 tape@^5.0.1:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/tape/-/tape-5.4.0.tgz#5fc60357771c634917e6a937b7bc1fa1a994d41d"
-  integrity sha512-8Cq4mql6oZVO7zkMcen+2AZoJyICsHjJqTiWk1kVub6C/EsS4o9zBVWWbvBBLzx10okW3SKCoNN9XfwfTAIR2w==
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/tape/-/tape-5.5.2.tgz#3750c415e6ddfbcd425945f02f1a907d2ea8171f"
+  integrity sha512-N9Ss672dFE3QlppiXGh2ieux8Ophau/HSAQguW5cXQworKxV0QvnZCYI35W1OYySTJk0OC9OPuS+0xNO6lhiTQ==
   dependencies:
+    array.prototype.every "^1.1.3"
     call-bind "^1.0.2"
     deep-equal "^2.0.5"
     defined "^1.0.0"
@@ -6811,6 +6822,7 @@ tape@^5.0.1:
     minimist "^1.2.5"
     object-inspect "^1.12.0"
     object-is "^1.1.5"
+    object-keys "^1.1.1"
     object.assign "^4.1.2"
     resolve "^2.0.0-next.3"
     resumer "^0.0.0"
