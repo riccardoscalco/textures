@@ -34,7 +34,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "d3-selection": "^2.0.0",
-    "faucet": "^0.0.1",
+    "faucet": "^0.0.3",
     "jsdom": "^19.0.0",
     "np": "^7.4.0",
     "rollup": "^1.18.0",
